@@ -20,6 +20,10 @@ class Router {
 			add_action( 'wp_ajax_wll_get_launcher_labels', [ Labels::class, 'getLabels' ] );
 			// setting
 			add_action( 'wp_ajax_wll_launcher_settings', [ Settings::class, 'getSettings' ] );
+			//save settings
+			add_action( 'wp_ajax_wll_launcher_save_design', [ Settings::class, 'saveDesign' ] );
+			add_action( 'wp_ajax_wll_launcher_save_content', [ Settings::class, 'saveContent' ] );
+			add_action( 'wp_ajax_wll_launcher_save_launcher', [ Settings::class, 'saveLauncher' ] );
 		}
 		add_filter( 'wlr_internal_addons_list', [ Common::class, 'addInternalAddons' ] );
 	}

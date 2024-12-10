@@ -39,7 +39,8 @@ const Content = () => {
             wll_nonce,
             action: "wll_launcher_save_content",
         };
-        params.content = JSON.stringify(content_value)
+        //params.content = JSON.stringify(content_value)
+        params.content = btoa(unescape(encodeURIComponent(JSON.stringify(content_value))));
         let json = await postRequest(params);
         let resJSON = getJSONData(json.data);
         if (resJSON.success === true && resJSON.data != null && resJSON.data !== {}) {

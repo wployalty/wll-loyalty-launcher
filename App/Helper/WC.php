@@ -131,4 +131,24 @@ class WC {
 
 		return wp_create_nonce( $action );
 	}
+
+	public static function getCleanHtml( $html ) {
+		try {
+			$html         = html_entity_decode( $html );
+			$html         = preg_replace( '/(<(script|style|iframe)\b[^>]*>).*?(<\/\2>)/is', "$1$3", $html );
+			$allowed_html = array(
+				'br'     => array(),
+				'strong' => array(),
+				'span'   => array( 'class' => array() ),
+				'div'    => array( 'class' => array() ),
+				'p'      => array( 'class' => array() ),
+				'b'      => array( 'class' => array() ),
+				'i'      => array( 'class' => array() ),
+			);
+
+			return wp_kses( $html, $allowed_html );
+		} catch ( \Exception $e ) {
+			return '';
+		}
+	}
 }

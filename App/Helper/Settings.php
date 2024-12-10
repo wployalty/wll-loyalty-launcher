@@ -287,44 +287,6 @@ class Settings {
 		return $referral_data;
 	}
 
-	public static function getLauncherButtonContentData( $is_admin_side = false ) {
-		$text_data = [
-			'launcher' => [
-				'appearance' => [
-					'text' => Settings::opt( 'launcher.appearance.text', 'My Rewards', 'launcher_button' ),
-					'icon' => [
-						'selected' => Settings::opt( 'launcher.appearance.icon.selected', 'default', 'launcher_button' ),
-					]
-				],
-			],
-		];
-		array_walk_recursive( $text_data, function ( &$value, $key ) use ( $is_admin_side ) {
-			/*$is_admin_side = isset($is_admin_side) && is_bool($is_admin_side) && $is_admin_side;*/
-			$value = ( ! $is_admin_side ) ? __( $value, 'wp-loyalty-rules' ) : $value;
-		} );
-		$data = [
-			'launcher' => [
-				'appearance'             => [
-					'selected' => Settings::opt( 'launcher.appearance.selected', 'icon_with_text', 'launcher_button' ),
-					'icon'     => [
-						'image' => Settings::opt( 'launcher.appearance.icon.image', '', 'launcher_button' ),
-						'icon'  => Settings::opt( 'launcher.appearance.icon.icon', 'gift', 'launcher_button' ),
-					],
-				],
-				'placement'              => [
-					'position'       => Settings::opt( 'launcher.placement.position', 'right', 'launcher_button' ),
-					'side_spacing'   => Settings::opt( 'launcher.placement.side_spacing', 0, 'launcher_button' ),
-					'bottom_spacing' => Settings::opt( 'launcher.placement.bottom_spacing', 0, 'launcher_button' ),
-				],
-				'view_option'            => Settings::opt( 'launcher.view_option', 'mobile_and_desktop', 'launcher_button' ),
-				'font_family'            => Settings::opt( 'launcher.font_family', 'inherit', 'launcher_button' ),
-				'show_conditions'        => Settings::opt( 'launcher.show_conditions', [], 'launcher_button' ),
-				'condition_relationship' => Settings::opt( 'launcher.condition_relationship', "and", 'launcher_button' )
-			]
-		];
-
-		return apply_filters( 'wll_launcher_popup_button_content_data', array_merge_recursive( $text_data, $data ) );
-	}
 
 	public static function opt( $key, $default = '', $option_name = 'design' ) {
 		if ( empty( $option_name ) || empty( $key ) ) {
