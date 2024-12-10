@@ -49,9 +49,12 @@ defined( 'WLL_MINIMUM_PHP_VERSION' ) or define( 'WLL_MINIMUM_PHP_VERSION', '7.4.
 defined( 'WLL_MINIMUM_WP_VERSION' ) or define( 'WLL_MINIMUM_WP_VERSION', '4.9' );
 defined( 'WLL_MINIMUM_WC_VERSION' ) or define( 'WLL_MINIMUM_WC_VERSION', '6.0' );
 defined( 'WLL_MINIMUM_WLR_VERSION' ) or define( 'WLL_MINIMUM_WLR_VERSION', '1.3.0' );
-
 defined( 'WLL_PLUGIN_VERSION' ) or define( 'WLL_PLUGIN_VERSION', '1.0.0' );
 defined( 'WLL_PLUGIN_SLUG' ) or define( 'WLL_PLUGIN_SLUG', 'wll-loyalty-launcher' );
+defined( 'WLL_PLUGIN_FILE' ) or define( 'WLL_PLUGIN_FILE', __FILE__ );
+defined( 'WLL_PLUGIN_DIR' ) or define( 'WLL_PLUGIN_DIR', str_replace( '\\', '/', __DIR__ ) );
+defined( 'WLL_PLUGIN_PATH' ) or define( 'WLL_PLUGIN_PATH', str_replace( '\\', '/', __DIR__ ) . '/' );
+defined( 'WLL_PLUGIN_URL' ) or define( 'WLL_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	return;
@@ -60,7 +63,6 @@ if ( ! class_exists( Plugin::class ) ) {
 	// Autoload the vendor
 	require_once __DIR__ . '/vendor/autoload.php';
 }
-
 add_action( 'plugins_loaded', function () {
 	if ( class_exists( Router::class ) && class_exists( \Wlr\App\Router::class ) ) {
 		Setup::init();

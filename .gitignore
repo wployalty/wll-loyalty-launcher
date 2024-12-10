@@ -1,3 +1,6 @@
 .idea
 vendor
 composer.lock
+launcher-admin-ui/node_modules
+launcher-admin-ui/package-lock.json
+assets/admin/js/dist
