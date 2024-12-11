@@ -5,51 +5,6 @@ defined( 'ABSPATH' ) || exit;
 
 class Settings {
 	/**
-	 * Get the value for a specific key from a given option name.
-	 *
-	 * @param mixed $key The specific key to retrieve the value for.
-	 * @param string $option_name The name of the option where the value is stored.
-	 * @param mixed $default The default value to return if the key is not found (default is an empty string).
-	 *
-	 * @return mixed The value associated with the key from the given option name, or the default value if not found.
-	 */
-	public static function get( $key, $option_name, $default = '' ) {
-		$settings = self::getSettings( $option_name );
-
-		return isset( $settings[ $key ] ) ? $settings[ $key ] : $default;
-	}
-
-	/**
-	 * Retrieves settings based on the provided option name.
-	 *
-	 * @param string $option_name The name of the settings option to retrieve. Must be one of: 'design', 'content', 'launcher_button'.
-	 *
-	 * @return array The settings associated with the specified option name. If the option name is invalid, an empty array is returned.
-	 */
-	public static function getSettings( string $option_name ) {
-		if ( empty( $option_name ) || ! in_array( $option_name, [
-				'design',
-				'content',
-				'launcher_button',
-				'loyalty'
-			] ) ) {
-			return [];
-		}
-		switch ( $option_name ) {
-			case 'design':
-				return get_option( 'wll_launcher_design_settings', [] );
-			case 'content':
-				return get_option( 'wll_launcher_content_settings', [] );
-			case 'launcher_button':
-				return get_option( 'wll_launcher_icon_settings', [] );
-			case 'loyalty':
-				return get_option( 'wlr_settings', [] );
-		}
-
-		return [];
-	}
-
-	/**
 	 * Retrieves short codes with their respective labels based on the loyalty settings.
 	 *
 	 * @return array Returns an array containing short code values and their labels grouped by different categories such as common, guest, member, and referral.
@@ -287,6 +242,81 @@ class Settings {
 		return $referral_data;
 	}
 
+	/**
+	 * Retrieves the design settings for the launcher.
+	 *
+	 * @return array
+	 */
+	public static function getDesignSettings() {
+		$theme_color = Settings::get( 'theme_color', 'loyalty', '#6F38C5' );
+
+		return (array) apply_filters( 'wll_launcher_design_content_data', [
+			'design' => [
+				'logo'     => [
+					'is_show' => Settings::opt( 'design.logo.is_show', 'show' ),
+					'image'   => Settings::opt( 'design.logo.image' ),
+				],
+				'colors'   => [
+					'theme'   => [
+						'primary' => Settings::opt( 'design.colors.theme.primary', $theme_color ),
+						'text'    => Settings::opt( 'design.colors.theme.text', 'white' ),
+					],
+					'buttons' => [
+						'background' => Settings::opt( 'design.colors.buttons.background', '#FF6B00' ),
+						'text'       => Settings::opt( 'design.colors.buttons.text', 'white' ),
+					],
+				],
+				'branding' => [
+					'is_show' => Settings::opt( 'design.branding.is_show', 'none' ),
+				]
+			]
+		] );
+	}
+
+	/**
+	 * Get the value for a specific key from a given option name.
+	 *
+	 * @param mixed $key The specific key to retrieve the value for.
+	 * @param string $option_name The name of the option where the value is stored.
+	 * @param mixed $default The default value to return if the key is not found (default is an empty string).
+	 *
+	 * @return mixed The value associated with the key from the given option name, or the default value if not found.
+	 */
+	public static function get( $key, $option_name, $default = '' ) {
+		$settings = self::getSettings( $option_name );
+
+		return isset( $settings[ $key ] ) ? $settings[ $key ] : $default;
+	}
+
+	/**
+	 * Retrieves settings based on the provided option name.
+	 *
+	 * @param string $option_name The name of the settings option to retrieve. Must be one of: 'design', 'content', 'launcher_button'.
+	 *
+	 * @return array The settings associated with the specified option name. If the option name is invalid, an empty array is returned.
+	 */
+	public static function getSettings( string $option_name ) {
+		if ( empty( $option_name ) || ! in_array( $option_name, [
+				'design',
+				'content',
+				'launcher_button',
+				'loyalty'
+			] ) ) {
+			return [];
+		}
+		switch ( $option_name ) {
+			case 'design':
+				return get_option( 'wll_launcher_design_settings', [] );
+			case 'content':
+				return get_option( 'wll_launcher_content_settings', [] );
+			case 'launcher_button':
+				return get_option( 'wll_launcher_icon_settings', [] );
+			case 'loyalty':
+				return get_option( 'wlr_settings', [] );
+		}
+
+		return [];
+	}
 
 	public static function opt( $key, $default = '', $option_name = 'design' ) {
 		if ( empty( $option_name ) || empty( $key ) ) {
@@ -315,5 +345,51 @@ class Settings {
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Retrieves the data for the launcher button content.
+	 *
+	 * @param bool $is_admin_side Whether to display data for admin side.
+	 *
+	 * @return array Returns an array containing the launcher button content data.
+	 */
+	public static function getLauncherButtonContentData( $is_admin_side = false ) {
+		$text_data = [
+			'launcher' => [
+				'appearance' => [
+					'text' => Settings::opt( 'launcher.appearance.text', 'My Rewards', 'launcher_button' ),
+					'icon' => [
+						'selected' => Settings::opt( 'launcher.appearance.icon.selected', 'default', 'launcher_button' ),
+					]
+				],
+			],
+		];
+		array_walk_recursive( $text_data, function ( &$value, $key ) use ( $is_admin_side ) {
+			/*$is_admin_side = isset($is_admin_side) && is_bool($is_admin_side) && $is_admin_side;*/
+			$value = ( ! $is_admin_side ) ? __( $value, 'wp-loyalty-rules' ) : $value;
+		} );
+		$data = [
+			'launcher' => [
+				'appearance'             => [
+					'selected' => Settings::opt( 'launcher.appearance.selected', 'icon_with_text', 'launcher_button' ),
+					'icon'     => [
+						'image' => Settings::opt( 'launcher.appearance.icon.image', '', 'launcher_button' ),
+						'icon'  => Settings::opt( 'launcher.appearance.icon.icon', 'gift', 'launcher_button' ),
+					],
+				],
+				'placement'              => [
+					'position'       => Settings::opt( 'launcher.placement.position', 'right', 'launcher_button' ),
+					'side_spacing'   => Settings::opt( 'launcher.placement.side_spacing', 0, 'launcher_button' ),
+					'bottom_spacing' => Settings::opt( 'launcher.placement.bottom_spacing', 0, 'launcher_button' ),
+				],
+				'view_option'            => Settings::opt( 'launcher.view_option', 'mobile_and_desktop', 'launcher_button' ),
+				'font_family'            => Settings::opt( 'launcher.font_family', 'inherit', 'launcher_button' ),
+				'show_conditions'        => Settings::opt( 'launcher.show_conditions', [], 'launcher_button' ),
+				'condition_relationship' => Settings::opt( 'launcher.condition_relationship', "and", 'launcher_button' )
+			]
+		];
+
+		return apply_filters( 'wll_launcher_popup_button_content_data', array_merge_recursive( $text_data, $data ) );
 	}
 }

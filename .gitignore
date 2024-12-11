@@ -3,4 +3,8 @@ vendor
 composer.lock
 launcher-admin-ui/node_modules
 launcher-admin-ui/package-lock.json
+launcher-site-ui/node_modules
+launcher-site-ui/package-lock.json
 assets/admin/js/dist
+assets/site/js/dist
+assets/site/css/launcher-ui.css.map
