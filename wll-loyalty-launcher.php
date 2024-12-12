@@ -68,6 +68,13 @@ add_action( 'plugins_loaded', function () {
 	if ( class_exists( Router::class ) && class_exists( \Wlr\App\Router::class ) ) {
 		Setup::init();
 		if ( Plugin::checkDependencies() ) {
+			$myUpdateChecker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
+				'https://github.com/wployalty/wll-loyalty-launcher',
+				__FILE__,
+				'wll-loyalty-launcher'
+			);
+			$myUpdateChecker->getVcsApi()->enableReleaseAssets();
+
 			Router::init();
 		}
 	}
