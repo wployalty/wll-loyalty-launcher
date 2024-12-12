@@ -120,7 +120,6 @@ class Plugin {
 	 * @return bool
 	 */
 	protected static function isLoyaltyCompatible(): bool {
-		
 		return (int) version_compare( self::getLoyaltyVersion(), WLL_MINIMUM_WLR_VERSION, '>=' ) > 0;
 	}
 

@@ -9,6 +9,13 @@ use Wlr\App\Models\Levels;
 defined( 'ABSPATH' ) || exit;
 
 class Member {
+	/**
+	 * Retrieves member content data based on the given parameters.
+	 *
+	 * @param bool $is_admin_side Whether the request is from the admin side.
+	 *
+	 * @return array An array containing member content data.
+	 */
 	public static function getMemberContentData( $is_admin_side = false ) {
 		$is_campaign_display          = Settings::get( 'is_campaign_display', 'wlr_settings', 'yes' );
 		$is_referral_action_available = false;
@@ -101,6 +108,13 @@ class Member {
 
 	}
 
+	/**
+	 * Retrieves user level data based on the given user object.
+	 *
+	 * @param object $user The user object containing level data.
+	 *
+	 * @return array An array containing user level data including current level information and progress.
+	 */
 	public static function getUserLevelData( $user ) {
 		if ( empty( $user ) ) {
 			return [ 'user_has_level' => false ];

@@ -263,6 +263,11 @@ class Labels {
 		];
 	}
 
+	/**
+	 * Retrieve the content labels for the launcher settings.
+	 *
+	 * @return array An associative array containing content labels for various launcher settings.
+	 */
 	public static function getLauncherContentLabels() {
 		return array(
 			'title'               => __( 'Launcher', 'wll-loyalty-launcher' ),
@@ -309,6 +314,11 @@ class Labels {
 		] );
 	}
 
+	/**
+	 * Retrieve the shortcodes with labels for different user types.
+	 *
+	 * @return array An associative array containing shortcodes and labels for guest, member, and referral users.
+	 */
 	public static function getShortCodeWithLabels() {
 		$short_code_list  = Settings::getShortCodesWithLabels();
 		$guest_short_code = $member_short_code = $referral_short_code = array();
@@ -341,6 +351,15 @@ class Labels {
 		];
 	}
 
+	/**
+	 * Retrieve the social share list for the member's referrals.
+	 *
+	 * This method fetches the user details and referral URL to generate a social share list
+	 * based on the user's email and referral URL. If the user details are not available or
+	 * the social share list cannot be generated, a dummy social share list is provided instead.
+	 *
+	 * @return array An associative array containing the social share list for the member's referrals.
+	 */
 	public static function getSocialShareList() {
 		$user              = Loyalty::getUserDetails();
 		$referral_url      = Loyalty::getReferralUrl( 'dummy' );

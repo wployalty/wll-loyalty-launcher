@@ -8,6 +8,13 @@ use Wlr\App\Models\Users;
 defined( 'ABSPATH' ) || exit;
 
 class Loyalty {
+	/**
+	 * Retrieves the point value associated with a given user email.
+	 *
+	 * @param string $user_email The email address of the user to retrieve points for.
+	 *
+	 * @return int The point value associated with the user if found, otherwise 0.
+	 */
 	public static function getUserPoint( string $user_email ) {
 		if ( empty( $user_email ) ) {
 			return 0;
@@ -17,6 +24,13 @@ class Loyalty {
 		return ! empty( $user ) ? $user->points : 0;
 	}
 
+	/**
+	 * Retrieves the loyalty user by their email.
+	 *
+	 * @param string $user_email The email of the loyalty user to retrieve.
+	 *
+	 * @return mixed The loyalty user data if found, otherwise an empty string.
+	 */
 	public static function getLoyaltyUserByEmail( string $user_email ) {
 		if ( empty( $user_email ) ) {
 			return '';
@@ -28,13 +42,25 @@ class Loyalty {
 		return $user_model->getWhere( $query );
 	}
 
+	/**
+	 * Determines if the plugin is in the Pro version based on filters.
+	 *
+	 * @return bool True if the plugin is in the Pro version, false otherwise.
+	 */
 	public static function isPro() {
 		return apply_filters( 'wlr_is_pro', false );
 	}
 
+	/**
+	 * Checks if a user is banned based on the user email.
+	 *
+	 * @param string $user_email The email of the user to check if banned. Defaults to an empty string.
+	 *
+	 * @return bool Whether the user is banned (true) or not (false).
+	 */
 	public static function isBannedUser( $user_email = "" ) {
 		if ( empty( $user_email ) ) {
-			$user_email = Loyalty::getLoginUserEmail();
+			$user_email = WC::getLoginUserEmail();
 			if ( empty( $user_email ) ) {
 				return false;
 			}
@@ -53,19 +79,14 @@ class Loyalty {
 		return ( ! empty( $user ) && is_object( $user ) && isset( $user->is_banned_user ) );
 	}
 
-	public static function getLoginUserEmail() {
-		$login_user = self::getLoginUser();
-
-		return ! empty( $login_user ) ? $login_user->user_email : '';
-	}
-
-	public static function getLoginUser() {
-		return function_exists( 'wp_get_current_user' ) ? wp_get_current_user() : false;
-	}
-
+	/**
+	 * Retrieves the campaigns list for the current user.
+	 *
+	 * @return array An array containing information about the campaigns.
+	 */
 	public static function getCampaigns() {
 		$customer_page = new \Wlr\App\Controllers\Site\CustomerPage();
-		$user_email    = self::getLoginUserEmail();
+		$user_email    = WC::getLoginUserEmail();
 		$campaign_list = $customer_page->getCampaignList();
 
 		if ( empty( $campaign_list ) || ! is_array( $campaign_list ) ) {
@@ -102,8 +123,13 @@ class Loyalty {
 		return [ 'earn_points' => $campaign_list, 'message' => $message ];
 	}
 
+	/**
+	 * Retrieves user details based on the user's email.
+	 *
+	 * @return stdClass Returns an instance of stdClass containing the user details.
+	 */
 	public static function getUserDetails() {
-		$user_email = self::getLoginUserEmail();
+		$user_email = WC::getLoginUserEmail();
 		if ( empty( $user_email ) ) {
 			return new \stdClass();
 		}
@@ -112,6 +138,14 @@ class Loyalty {
 		return $customer_page->getPageUserDetails( $user_email, 'launcher' );
 	}
 
+	/**
+	 * Retrieves the actions for a given campaign and user.
+	 *
+	 * @param object $active_campaigns The active campaign object.
+	 * @param object $user The user object.
+	 *
+	 * @return void
+	 */
 	public static function getCampaignActions( &$active_campaigns, $user ) {
 		if ( empty( $active_campaigns ) || ! is_object( $active_campaigns ) ) {
 			return;
@@ -129,9 +163,9 @@ class Loyalty {
 				$active_campaigns->achieved_text = $active_campaigns->is_achieved ? __( 'Earned', 'wp-loyalty-rules' ) : "";
 				break;
 			case 'birthday':
-				$active_campaigns->is_allow_edit           = WC::canShowBirthdateField();
-				$active_campaigns->birth_date              = ! empty( $user->birthday_date ) && $user->birthday_date != '0000-00-00' ? WC::convertDateFormat( $user->birthday_date, "Y-m-d" ) : ( ! empty( $user->birth_date ) ? WC::beforeDisplayDate( $user->birth_date, "Y-m-d" ) : '' );
-				$active_campaigns->display_birth_date      = ! empty( $user->birthday_date ) && $user->birthday_date != '0000-00-00' ? WC::convertDateFormat( $user->birthday_date ) : ( ! empty( $user->birth_date ) ? WC::beforeDisplayDate( $user->birth_date ) : '' );
+				$active_campaigns->is_allow_edit           = self::canShowBirthdateField();
+				$active_campaigns->birth_date              = ! empty( $user->birthday_date ) && $user->birthday_date != '0000-00-00' ? Util::convertDateFormat( $user->birthday_date, "Y-m-d" ) : ( ! empty( $user->birth_date ) ? Util::beforeDisplayDate( $user->birth_date, "Y-m-d" ) : '' );
+				$active_campaigns->display_birth_date      = ! empty( $user->birthday_date ) && $user->birthday_date != '0000-00-00' ? Util::convertDateFormat( $user->birthday_date ) : ( ! empty( $user->birth_date ) ? Util::beforeDisplayDate( $user->birth_date ) : '' );
 				$active_campaigns->user_can_edit_birthdate = ( isset( $user->id ) && $user->id > 0 );
 				$active_campaigns->show_edit_birthday      = apply_filters( "wlr_allow_my_account_edit_birth_date", true, $active_campaigns->user_can_edit_birthdate, ! empty( $user ) ? $user : new \stdClass() );
 				$active_campaigns->edit_text               = ! empty( $active_campaigns->birth_date ) ? __( 'Edit', 'wp-loyalty-rules' ) : __( 'Set', 'wp-loyalty-rules' );
@@ -178,6 +212,14 @@ class Loyalty {
 		}
 	}
 
+	/**
+	 * Check if a user has achieved a specific campaign.
+	 *
+	 * @param string $user_email The email of the user to check.
+	 * @param int $campaign_id The ID of the campaign to check.
+	 *
+	 * @return bool Returns true if the user has achieved the campaign, false otherwise.
+	 */
 	public static function isCampaignAchieved( $user_email, $campaign_id ) {
 		if ( empty( $user_email ) || ! is_string( $user_email ) || empty( $campaign_id ) || $campaign_id <= 0 ) {
 			return false;
@@ -190,9 +232,36 @@ class Loyalty {
 		return ! empty( $result ) && isset( $result->count ) && ( $result->count > 0 );
 	}
 
+	/**
+	 * Determines if the birthdate field should be shown based on settings and user data.
+	 *
+	 * @return bool True if the birthdate field should be shown, false otherwise.
+	 */
+	public static function canShowBirthdateField() {
+		$is_one_time_birthdate_edit = Settings::get( 'is_one_time_birthdate_edit', 'wlr_settings', 'no' );
+		$show_birthdate             = true;
+		if ( $is_one_time_birthdate_edit == 'no' ) {
+			$user_email    = WC::getLoginUserEmail();
+			$user          = Loyalty::getLoyaltyUserByEmail( $user_email );
+			$birthday_date = is_object( $user ) && ! empty( $user->birthday_date ) && $user->birthday_date != '0000-00-00' ? $user->birthday_date : ( is_object( $user ) && ! empty( $user->birth_date ) ? Util::beforeDisplayDate( $user->birth_date, 'Y-m-d' ) : '' );
+			if ( ! empty( $birthday_date ) && $birthday_date != '0000-00-00' ) {
+				$show_birthdate = false;
+			}
+		}
+
+		return $show_birthdate;
+	}
+
+	/**
+	 * Get the referral URL for a given referral code or current user.
+	 *
+	 * @param string $code The referral code to generate the URL for. If empty, the current user's referral code will be used.
+	 *
+	 * @return string The referral URL based on the provided code or current user's referral code.
+	 */
 	public static function getReferralUrl( $code = '' ) {
 		if ( empty( $code ) ) {
-			$user_email = self::getLoginUserEmail();
+			$user_email = WC::getLoginUserEmail();
 			$user       = self::getLoyaltyUserByEmail( $user_email );
 			$code       = ! empty( $user ) && ! empty( $user->refer_code ) ? $user->refer_code : '';
 		}
@@ -204,6 +273,14 @@ class Loyalty {
 		return apply_filters( 'wlr_get_referral_url', $url, $code );
 	}
 
+	/**
+	 * Retrieves the social icon list based on the provided user email and URL.
+	 *
+	 * @param string $user_email The email of the user.
+	 * @param string $url The URL for which the social icons are retrieved.
+	 *
+	 * @return array Returns an array of social icons with additional data merged from the social share list.
+	 */
 	public static function getSocialIconList( $user_email, $url ) {
 		if ( empty( $user_email ) || empty( $url ) ) {
 			return [];
@@ -218,6 +295,11 @@ class Loyalty {
 		return $social_icon_list;
 	}
 
+	/**
+	 * Retrieves a list of dummy campaigns.
+	 *
+	 * @return array Returns an array of dummy campaign information including ID, icon, title, and description.
+	 */
 	public static function getDummyCampaigns() {
 		return [
 			[
@@ -253,6 +335,13 @@ class Loyalty {
 		];
 	}
 
+	/**
+	 * Retrieves the text representation of the user reward based on the provided user reward object.
+	 *
+	 * @param object $user_reward The user reward object containing information about the reward.
+	 *
+	 * @return string The text representation of the user reward based on its type and values.
+	 */
 	public static function getUserRewardText( $user_reward ) {
 		if ( empty( $user_reward ) || ! is_object( $user_reward ) ) {
 			return '';
@@ -309,6 +398,13 @@ class Loyalty {
 		return apply_filters( 'wlr_get_point_label', $point_label, $point );
 	}
 
+	/**
+	 * Retrieves the coupon text based on the user's reward object.
+	 *
+	 * @param object $user_reward The reward object containing information about the coupon.
+	 *
+	 * @return string Returns the formatted coupon text based on the discount value and type in the user's reward object.
+	 */
 	public static function getUserCouponText( $user_reward ) {
 		if ( empty( $user_reward ) || ! is_object( $user_reward ) ) {
 			return '';
@@ -338,6 +434,18 @@ class Loyalty {
 		return $text;
 	}
 
+	/**
+	 * Retrieve a list of dummy rewards for display.
+	 *
+	 * This method returns an array of dummy reward items with the following structure:
+	 * - 'id': The ID of the reward item.
+	 * - 'icon': The icon representing the reward.
+	 * - 'title': The title of the reward.
+	 * - 'description': The description of the reward.
+	 * - 'action_text': The action text related to the reward.
+	 *
+	 * @return array An array of dummy reward items.
+	 */
 	public static function getDummyRewardList() {
 		return [
 			[
@@ -371,6 +479,20 @@ class Loyalty {
 		];
 	}
 
+	/**
+	 * Retrieve a list of dummy coupon data for display.
+	 *
+	 * This method returns an array of dummy coupon items with the following structure:
+	 * - 'id': The ID of the coupon item.
+	 * - 'icon': The icon representing the coupon.
+	 * - 'title': The title of the coupon.
+	 * - 'description': The description of the coupon.
+	 * - 'expired_text': Text indicating the expiration date of the coupon (if applicable).
+	 * - 'coupon_code': The unique coupon code.
+	 * - 'action_text': The action text related to the coupon.
+	 *
+	 * @return array An array of dummy coupon items.
+	 */
 	public static function getDummyCouponData() {
 		return [
 			[
@@ -404,8 +526,21 @@ class Loyalty {
 		];
 	}
 
+	/**
+	 * Retrieve reward opportunities for the user.
+	 *
+	 * This method retrieves a list of reward opportunities based on the user's status:
+	 * - If the user is logged in, it gets the rewards from the customer page.
+	 * - If the user is a guest, it returns an empty array.
+	 * - If no rewards are found or the rewards array is empty, a message is displayed.
+	 * - Each reward's name and description are translated using the text domain 'wp-loyalty-rules'.
+	 *
+	 * @return array An array containing:
+	 *               - 'reward_opportunity': The list of reward opportunities.
+	 *               - 'message': A message indicating the availability of rewards.
+	 */
 	public static function getRewardOpportunities() {
-		$user_email    = Loyalty::getLoginUserEmail();
+		$user_email    = WC::getLoginUserEmail();
 		$is_guest      = empty( $user_email );
 		$customer_page = new \Wlr\App\Controllers\Site\CustomerPage();
 		$rewards       = $customer_page->getRewardList();
@@ -430,6 +565,17 @@ class Loyalty {
 		], $user_email, $is_guest );
 	}
 
+	/**
+	 * Retrieve the label for rewards based on the reward count.
+	 *
+	 * Retrieves the singular or plural label for rewards based on the 'reward_singular_label'
+	 * and 'reward_plural_label' settings in the 'wlr_settings' option. If these settings are
+	 * not defined, default labels are used.
+	 *
+	 * @param int $reward_count The count of rewards for which the label is being determined.
+	 *
+	 * @return string The label for the rewards based on the reward count.
+	 */
 	public static function getRewardLabel( $reward_count = 0 ) {
 		$setting_option = get_option( 'wlr_settings', [] );
 		$singular       = ( ! empty( $setting_option['reward_singular_label'] ) ) ? __( $setting_option['reward_singular_label'], 'wp-loyalty-rules' ) : __( 'reward', 'wp-loyalty-rules' );
@@ -439,6 +585,18 @@ class Loyalty {
 		return apply_filters( 'wlr_get_reward_label', $reward_label, $reward_count );
 	}
 
+	/**
+	 * Retrieve a list of dummy reward opportunities for display.
+	 *
+	 * This method returns an array of dummy reward opportunity items with the following structure:
+	 * - 'id': The ID of the reward opportunity.
+	 * - 'icon': The icon representing the reward opportunity.
+	 * - 'title': The title of the reward opportunity.
+	 * - 'description': The description of the reward opportunity.
+	 * - 'action_text': The action text related to the reward opportunity.
+	 *
+	 * @return array An array of dummy reward opportunity items.
+	 */
 	public static function getDummyRewardOpportunities() {
 		return [
 			[

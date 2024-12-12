@@ -5,6 +5,13 @@ namespace WLL\App\Helper;
 defined( 'ABSPATH' ) || exit;
 
 class Translate {
+	/**
+	 * Retrieves dynamic guest strings based on predefined keys and settings.
+	 *
+	 * @param array $new_strings An array to store the dynamic guest strings.
+	 *
+	 * @return void
+	 */
 	public static function getGuestDynamicStrings( &$new_strings ) {
 		$content          = Settings::getSettings( 'content' );//saved data
 		$d_guest          = [ 'content' => Guest::getGuestContentData( true ) ];
@@ -27,6 +34,15 @@ class Translate {
 		}
 	}
 
+	/**
+	 * Retrieves a string value based on key from saved settings or default settings.
+	 *
+	 * @param string $key The key to look for in the settings.
+	 * @param string $default The default value to use if key is not found in saved settings.
+	 * @param array $saved The array of saved settings to search for the key.
+	 *
+	 * @return string The value corresponding to the key, or an empty string if not found.
+	 */
 	public static function getString( $key, $default, $saved ) {
 		if ( strpos( $key, "." ) !== false ) {
 			$identifiers = explode( ".", $key );//splitting keys for sub array values
@@ -39,6 +55,13 @@ class Translate {
 		return ( ! empty( $value ) ) ? $value : '';
 	}
 
+	/**
+	 * Retrieve dynamic strings related to the member.
+	 *
+	 * @param array $new_strings An array to store the dynamically generated strings.
+	 *
+	 * @return void
+	 */
 	public static function getMemberDynamicStrings( &$new_strings ) {
 		$content = Settings::getSettings( 'content' );//saved data
 
@@ -62,6 +85,13 @@ class Translate {
 		}
 	}
 
+	/**
+	 * Retrieves dynamic strings for the launcher button based on provided input data.
+	 *
+	 * @param array $new_strings Reference to an array where the dynamic strings will be stored.
+	 *
+	 * @return void
+	 */
 	public static function getLauncherDynamicStrings( &$new_strings ) {
 		$launcher            = Settings::getSettings( 'launcher_button' );//saved data
 		$d_launcher          = Settings::getLauncherButtonContentData( true );

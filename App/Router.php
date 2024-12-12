@@ -11,6 +11,11 @@ use WLL\App\Controller\Member;
 defined( 'ABSPATH' ) or die;
 
 class Router {
+	/**
+	 * Initialize the necessary actions and filters based on the context.
+	 *
+	 * @return void
+	 */
 	public static function init() {
 		if ( is_admin() ) {
 			add_action( 'admin_menu', [ Common::class, 'addMenu' ] );

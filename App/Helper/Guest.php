@@ -8,6 +8,13 @@ use Wlr\App\Models\EarnCampaign;
 defined( 'ABSPATH' ) || exit;
 
 class Guest {
+	/**
+	 * Retrieves guest content data based on the provided parameters.
+	 *
+	 * @param bool $is_admin_side Specifies if the request is coming from the admin side.
+	 *
+	 * @return array Returns an array containing guest content data after processing shortcodes and translations.
+	 */
 	public static function getGuestContentData( $is_admin_side = false ) {
 		$short_code_data = [
 			'guest' => [

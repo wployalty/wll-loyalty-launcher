@@ -68,6 +68,13 @@ class Settings {
 		wp_send_json_success( [ 'message' => __( 'Settings saved!', 'wll-loyalty-launcher' ) ] );
 	}
 
+	/**
+	 * Save content settings.
+	 *
+	 * This method saves the content settings after validation.
+	 *
+	 * @return void
+	 */
 	public static function saveContent() {
 		if ( ! WC::isSecurityValid( 'wll_content_settings' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
@@ -95,6 +102,13 @@ class Settings {
 		wp_send_json_success( [ 'message' => __( 'Settings saved!', 'wll-loyalty-launcher' ) ] );
 	}
 
+	/**
+	 * Save launcher settings.
+	 *
+	 * This method saves the launcher settings after validation.
+	 *
+	 * @return void
+	 */
 	public static function saveLauncher() {
 		if ( ! WC::isSecurityValid( 'wll_launcher_settings' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );

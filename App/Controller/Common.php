@@ -85,7 +85,7 @@ class Common {
 		wp_enqueue_style( WLR_PLUGIN_SLUG . '-alertify', WLR_PLUGIN_URL . 'Assets/Admin/Css/alertify.css', [], WLR_PLUGIN_VERSION );
 		wp_enqueue_script( WLR_PLUGIN_SLUG . '-alertify', WLR_PLUGIN_URL . 'Assets/Admin/Js/alertify.js', [ 'jquery' ], WLR_PLUGIN_VERSION . '&t=' . time() );
 		$common_path   = WLL_PLUGIN_DIR . '/assets/admin/js/dist';
-		$js_files      = WC::getDirFileLists( $common_path );
+		$js_files      = Util::getDirFileLists( $common_path );
 		$localize_name = '';
 		foreach ( $js_files as $file ) {
 			$path         = str_replace( WLL_PLUGIN_PATH, '', $file );
@@ -139,6 +139,14 @@ class Common {
 		return $add_ons;
 	}
 
+	/**
+	 * Determines if the URL is valid for loading the launcher.
+	 *
+	 * This method checks the show conditions set in the settings to decide if the launcher should be loaded based on the current URL.
+	 * It verifies the URL conditions specified in the settings array and returns a boolean indicating if the launcher should be displayed.
+	 *
+	 * @return bool Returns true if the URL meets the conditions to load the launcher, false otherwise.
+	 */
 	public static function isUrlValidToLoadLauncher() {
 		$show_condition = Settings::opt( 'launcher.show_conditions', [], 'launcher_button' );
 		if ( empty( $show_condition ) ) {
@@ -184,6 +192,19 @@ class Common {
 		return $condition_status;
 	}
 
+	/**
+	 * Enqueue site-specific scripts and styles for the application.
+	 *
+	 * This method checks if the user is banned or if the filter for loading assets before the launcher is set to false.
+	 * If conditions are not met, the method returns early.
+	 *
+	 * Depending on the SCRIPT_DEBUG constant, a suffix for asset files is defined and appended.
+	 *
+	 * It fetches a list of JavaScript files from the specified directory and registers/enqueues the main bundle script.
+	 * Localizes data for scripts, setting the ajax URL for AJAX requests.
+	 *
+	 * @return void
+	 */
 	public static function siteScripts() {
 		if ( Loyalty::isBannedUser() || ! apply_filters( 'wll_before_launcher_assets', true ) ) {
 			return;
@@ -197,7 +218,7 @@ class Common {
 		wp_enqueue_style( WLL_PLUGIN_SLUG . '-wlr-font', WLR_PLUGIN_URL . 'Assets/Site/Css/wlr-fonts' . $suffix . '.css', [], WLR_PLUGIN_VERSION . $add_cache_fix );
 		wp_enqueue_style( WLL_PLUGIN_SLUG . '-wlr-launcher', WLL_PLUGIN_URL . 'assets/site/css/launcher-ui.css', [], WLR_PLUGIN_VERSION . $add_cache_fix );
 		$common_path   = WLL_PLUGIN_DIR . '/assets/site/js/dist';
-		$js_files      = WC::getDirFileLists( $common_path );
+		$js_files      = Util::getDirFileLists( $common_path );
 		$localize_name = "";
 		foreach ( $js_files as $file ) {
 			$path         = str_replace( WLL_PLUGIN_PATH, '', $file );
@@ -216,6 +237,19 @@ class Common {
 		wp_localize_script( $localize_name, 'wll_localize_data', $localize );
 	}
 
+	/**
+	 * Get the launcher widget to display on the site.
+	 *
+	 * This method checks if the user is banned or if the filter for displaying the launcher widget is set to false.
+	 * If conditions are not met, the method returns early.
+	 *
+	 * It allows modification of arguments before rendering the launcher widget through the 'wll_before_launcher_site_page' filter.
+	 *
+	 * It retrieves the path to the main site template file and renders the template with the specified arguments.
+	 * The rendered template is then passed through the 'wll_launcher_widget' filter before being displayed.
+	 *
+	 * @return void
+	 */
 	public static function getLauncherWidget() {
 		if ( Loyalty::isBannedUser() || ! apply_filters( 'wll_before_launcher_display', true ) ) {
 			return;
@@ -227,6 +261,18 @@ class Common {
 		echo apply_filters( 'wll_launcher_widget', Util::renderTemplate( $path, $args, false ), $args );
 	}
 
+	/**
+	 * Retrieve data for the launcher widget.
+	 *
+	 * Fetches design settings, guest and member content data, and popup button content data to compile the widget settings.
+	 * Sets various user-related flags and details.
+	 * Configures labels and texts displayed in the launcher widget.
+	 * Generates nonces required for security purposes.
+	 * Configures additional settings for JavaScript functionalities.
+	 * Sends the compiled settings as a JSON response.
+	 *
+	 * @return void
+	 */
 	public static function getLauncherWidgetData() {
 		//design
 		$design_settings = Settings::getDesignSettings();
@@ -237,7 +283,7 @@ class Common {
 		//popup button
 		$popup_button_settings                    = Settings::getLauncherButtonContentData();
 		$settings                                 = array_merge( $design_settings, $content_settings, $popup_button_settings );
-		$settings['is_member']                    = ! empty( Loyalty::getLoginUserEmail() );
+		$settings['is_member']                    = ! empty( WC::getLoginUserEmail() );
 		$settings['is_edit_after_birth_day_date'] = Settings::get( 'is_one_time_birthdate_edit', 'wlr_settings', 'no' );
 		$settings['is_pro']                       = Loyalty::isPro();
 		$user                                     = Loyalty::getUserDetails();
@@ -278,6 +324,15 @@ class Common {
 		wp_send_json_success( $settings );
 	}
 
+	/**
+	 * Get the JavaScript date format based on the PHP date format setting.
+	 *
+	 * This method retrieves the date format option from WordPress settings.
+	 * It then maps PHP date format characters to their equivalent JavaScript date format for frontend usage.
+	 * Finally, it transforms the PHP date format into a JavaScript-compatible format using the mapping.
+	 *
+	 * @return string The JavaScript date format generated from the PHP date format.
+	 */
 	public static function getJsDateFormat() {
 		$date_format    = get_option( 'date_format' );
 		$format_mapping = apply_filters( 'wll_date_format_mapping_list', [
@@ -310,6 +365,20 @@ class Common {
 		return strtr( $date_format, $format_mapping );
 	}
 
+	/**
+	 * Get dynamic strings for the Loyalty Launcher based on provided input.
+	 *
+	 * This method checks if the input strings are in the correct format and the text domain matches 'wll-loyalty-launcher'.
+	 * If conditions are not met, it returns the input strings as is.
+	 *
+	 * Calls Translate::getGuestDynamicStrings(), Translate::getMemberDynamicStrings(), and Translate::getLauncherDynamicStrings()
+	 * to append additional dynamic strings to the input array.
+	 *
+	 * @param array $new_strings An array of new strings to include in the Launcher dynamic content.
+	 * @param string $text_domain The text domain of the strings.
+	 *
+	 * @return array The updated array of dynamic strings for the Loyalty Launcher.
+	 */
 	public static function getLauncherDynamicStrings( $new_strings, $text_domain ) {
 		if ( ! is_array( $new_strings ) || ! is_string( $text_domain ) || $text_domain != 'wll-loyalty-launcher' ) {
 			return $new_strings;

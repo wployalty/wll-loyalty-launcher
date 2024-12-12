@@ -68,6 +68,11 @@ class Settings {
 		] );
 	}
 
+	/**
+	 * Get the list of dummy social share items.
+	 *
+	 * @return array
+	 */
 	public static function getDummySocialShareList() {
 		return [
 			[
@@ -79,34 +84,42 @@ class Settings {
 				'name'          => 'Facebook'
 			],
 			[
-				"action_type"   => 'twitter_share',
-				"icon"          => 'wlr wlrf-twitter_share',
-				"share_content" => 'hey',
-				"url"           => 'https://twitter.com/intent/tweet?text=hey',
-				"image_icon"    => '',
-				"name"          => 'Twitter'
+				'action_type'   => 'twitter_share',
+				'icon'          => 'wlr wlrf-twitter_share',
+				'share_content' => 'hey',
+				'url'           => 'https://twitter.com/intent/tweet?text=hey',
+				'image_icon'    => '',
+				'name'          => 'Twitter'
 			],
 			[
-				"action_type"   => 'whatsapp_share',
-				"icon"          => 'wlr wlrf-whatsapp_share',
-				"share_content" => 'oi',
-				"url"           => 'https://api.whatsapp.com/send?text=oi',
-				"image_icon"    => '',
-				"name"          => 'WhatsApp'
+				'action_type'   => 'whatsapp_share',
+				'icon'          => 'wlr wlrf-whatsapp_share',
+				'share_content' => 'oi',
+				'url'           => 'https://api.whatsapp.com/send?text=oi',
+				'image_icon'    => '',
+				'name'          => 'WhatsApp'
 			],
 			[
-				"action_type"   => 'email_share',
-				"icon"          => 'wlr wlrf-email_share',
-				"share_content" => '',
-				"url"           => 'mailto:?subject=Morning&amp;body=good%20morning',
-				"image_icon"    => '',
-				"name"          => 'E-mail',
-				"share_subject" => 'Morning',
-				"share_body"    => 'Good morning'
+				'action_type'   => 'email_share',
+				'icon'          => 'wlr wlrf-email_share',
+				'share_content' => '',
+				'url'           => 'mailto:?subject=Morning&amp;body=good%20morning',
+				'image_icon'    => '',
+				'name'          => 'E-mail',
+				'share_subject' => 'Morning',
+				'share_body'    => 'Good morning'
 			]
 		];
 	}
 
+	/**
+	 * Process short codes within a given message.
+	 *
+	 * @param string $message The message containing short codes to process.
+	 * @param bool $is_admin_page Optional. Whether the message is on an admin page (default is false).
+	 *
+	 * @return string The message with short codes processed or the original message if no short codes were found.
+	 */
 	public static function processShortCodes( $message, $is_admin_page = false ) {
 		if ( empty( $message ) ) {
 			return $message;
@@ -156,8 +169,8 @@ class Settings {
 			$short_code_list['{wlr_referral_friend_point_percentage}']   = '10 %';
 			$short_code_list['{wlr_referral_friend_reward}']             = 'NOOBIE';
 		} else {
-			$user       = Loyalty::getLoginUser();
-			$user_email = Loyalty::getLoginUserEmail();
+			$user       = WC::getLoginUser();
+			$user_email = WC::getLoginUserEmail();
 			if ( ! empty( $user_email ) ) {
 				$points                                                      = Loyalty::getUserPoint( $user_email );
 				$referral_points                                             = self::getReferralData();
@@ -267,7 +280,7 @@ class Settings {
 					],
 				],
 				'branding' => [
-					'is_show' => Settings::opt( 'design.branding.is_show', 'none' ),
+					'is_show' => Loyalty::isPro() ? Settings::opt( 'design.branding.is_show', 'none' ) : 'show',
 				]
 			]
 		] );
@@ -318,6 +331,15 @@ class Settings {
 		return [];
 	}
 
+	/**
+	 * Get the value for a specific key from a given option name in the system.
+	 *
+	 * @param mixed $key The specific key to retrieve the value for.
+	 * @param mixed $default The default value to return if the key is not found. Default is an empty string.
+	 * @param string $option_name The name of the option where the value is stored. Default is 'design'.
+	 *
+	 * @return mixed The value associated with the key from the given option name, or the default value if not found after applying filters.
+	 */
 	public static function opt( $key, $default = '', $option_name = 'design' ) {
 		if ( empty( $option_name ) || empty( $key ) ) {
 			return $default;
@@ -332,6 +354,14 @@ class Settings {
 		return apply_filters( 'wll_launcher_option_setting', $value, $key );
 	}
 
+	/**
+	 * Get the value based on a series of nested keys from a given data array or object.
+	 *
+	 * @param mixed $data The data array or object from which to extract the value.
+	 * @param array $identifiers An array of keys representing the nested structure to traverse.
+	 *
+	 * @return mixed The value associated with the nested keys from the data structure, or an empty string if not found.
+	 */
 	public static function getOptValue( $data, $identifiers ) {
 		$identifier = array_shift( $identifiers ); //shifting first key from array
 		if ( is_object( $data ) && isset( $data->$identifier ) && is_object( $data->$identifier ) ) {

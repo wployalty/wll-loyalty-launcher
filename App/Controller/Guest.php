@@ -9,6 +9,11 @@ use WLL\App\Helper\WC;
 defined( 'ABSPATH' ) or die;
 
 class Guest {
+	/**
+	 * Get earn campaigns based on security validation and user role.
+	 *
+	 * @return void
+	 */
 	public static function getEarnCampaigns() {
 		if ( ! WC::isSecurityValid( 'render_page_nonce' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
@@ -19,12 +24,22 @@ class Guest {
 		wp_send_json_success( [ 'earn_points' => Loyalty::getDummyCampaigns() ] );
 	}
 
+	/**
+	 * Retrieve redeemable rewards data for the logged-in user.
+	 *
+	 * This method fetches the list of redeemable rewards for the user based on certain conditions.
+	 * It performs security validation before processing the rewards data.
+	 * If the user is not an admin, it retrieves the rewards list and processes each reward item.
+	 * It sends a success response with the reward list and a message if rewards are found, otherwise, it sends a dummy reward list.
+	 *
+	 * @return void
+	 */
 	public static function getRedeemRewards() {
 		if ( ! WC::isSecurityValid( 'render_page_nonce' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
 		}
 		if ( ! Util::isAdminSide() ) {
-			$user_email    = Loyalty::getLoginUserEmail();
+			$user_email    = WC::getLoginUserEmail();
 			$customer_page = new \Wlr\App\Controllers\Site\CustomerPage();
 			$rewards       = $customer_page->getRewardList();
 			if ( ! empty( $rewards ) && is_array( $rewards ) ) {

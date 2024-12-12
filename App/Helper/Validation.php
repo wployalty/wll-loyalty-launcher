@@ -7,6 +7,16 @@ use Valitron\Validator;
 defined( 'ABSPATH' ) || exit;
 
 class Validation {
+	/**
+	 * validate and sanitize text field value
+	 *
+	 * @param $field
+	 * @param $value
+	 * @param array $params
+	 * @param array $fields
+	 *
+	 * @return bool
+	 */
 	public static function validateSanitizeText( $field, $value, array $params, array $fields ) {
 		$after_value = sanitize_text_field( $value );
 		$status      = false;
@@ -17,6 +27,13 @@ class Validation {
 		return $status;
 	}
 
+	/**
+	 * Validate the design tab fields in the provided post data.
+	 *
+	 * @param array $post The post data containing design tab information.
+	 *
+	 * @return bool|array True if validation passes, or an array of validation errors.
+	 */
 	public static function validateDesignTab( $post ) {
 		$validator       = new Validator( $post );
 		$settings_labels = [
@@ -85,7 +102,7 @@ class Validation {
 	 * @return bool
 	 */
 	public static function validateCleanHtml( $field, $value, array $params, array $fields ) {
-		$html  = WC::getCleanHtml( $value );
+		$html  = Util::getCleanHtml( $value );
 		$value = str_replace( '&amp;', '&', $value );
 		$html  = str_replace( '&amp;', '&', $html );
 		if ( $html != $value ) {
@@ -95,12 +112,32 @@ class Validation {
 		return true;
 	}
 
+	/**
+	 * Validate the number field value.
+	 *
+	 * @param mixed $field The field being validated.
+	 * @param mixed $value The value of the field to be validated.
+	 * @param array $params Additional parameters for validation (not used in this method).
+	 * @param array $fields Other fields in the form (not used in this method).
+	 *
+	 * @return bool True if the value is a valid number, false otherwise.
+	 */
 	public static function validateNumber( $field, $value, $params, $fields ) {
 		$value = (int) $value;
 
 		return preg_match( '/^([0-9])+$/i', $value );
 	}
 
+	/**
+	 * validate the not allowed guest shortcodes in the provided value
+	 *
+	 * @param $field
+	 * @param $value
+	 * @param array $params
+	 * @param array $fields
+	 *
+	 * @return bool
+	 */
 	public static function validateNotAllowedGuestShortcode( $field, $value, array $params, array $fields ) {
 		$status = true;
 		if ( empty( $value ) ) {
@@ -127,6 +164,16 @@ class Validation {
 		return $status;
 	}
 
+	/**
+	 * Validate if the value does not contain specific shortcodes that are not allowed.
+	 *
+	 * @param mixed $field The field being validated.
+	 * @param string $value The value to check for not allowed shortcodes.
+	 * @param array $params Additional parameters for validation.
+	 * @param array $fields Other fields related to the validation.
+	 *
+	 * @return bool Returns true if the value does not contain not allowed shortcodes, false otherwise.
+	 */
 	public static function validateNotAllowedMemberShortcode( $field, $value, array $params, array $fields ) {
 		$status = true;
 		if ( empty( $value ) ) {
@@ -143,6 +190,13 @@ class Validation {
 		return $status;
 	}
 
+	/**
+	 * validate the content tab fields for specific rules and validations
+	 *
+	 * @param $post array The array containing the post data to validate
+	 *
+	 * @return bool|array If validation passes, returns true. If validation fails, returns an array of errors.
+	 */
 	public static function validateContentTab( $post ) {
 		$validator       = new Validator( $post );
 		$settings_labels = [
@@ -278,6 +332,16 @@ class Validation {
 		return $validator->validate() ? true : $validator->errors();
 	}
 
+	/**
+	 * Validate if the URL contains specific criteria.
+	 *
+	 * @param $field
+	 * @param $value
+	 * @param array $params
+	 * @param array $fields
+	 *
+	 * @return bool Returns true if the URL meets the specified criteria, false otherwise.
+	 */
 	public static function validateUrlContains( $field, $value, array $params, array $fields ) {
 		if ( filter_var( $value, FILTER_VALIDATE_URL ) !== false ) {
 			return false; // Full URL is not allowed
@@ -290,6 +354,16 @@ class Validation {
 		return true;
 	}
 
+	/**
+	 * Validates if a field is empty.
+	 *
+	 * @param mixed $field The field being validated.
+	 * @param mixed $value The value of the field to be checked for emptiness.
+	 * @param array $params Additional parameters for validation (not used in the method).
+	 * @param array $fields Additional fields for validation (not used in the method).
+	 *
+	 * @return bool Returns true if the value is not empty, false otherwise.
+	 */
 	public static function validateIsEmpty( $field, $value, array $params, array $fields ) {
 		$status = false;
 		if ( ! empty( $value ) ) {
@@ -299,6 +373,13 @@ class Validation {
 		return $status;
 	}
 
+	/**
+	 * Validates the launcher tab settings submitted in the $post array.
+	 *
+	 * @param array $post The array containing the launcher tab settings data.
+	 *
+	 * @return bool|array Returns true if the validation is successful, or an array of validation errors.
+	 */
 	public static function validateLauncherTab( $post ) {
 		$validator       = new Validator( $post );
 		$settings_labels = [

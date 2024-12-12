@@ -11,6 +11,14 @@ use Wlr\App\Models\UserRewards;
 defined( 'ABSPATH' ) or die;
 
 class Member {
+	/**
+	 * Get the earn campaigns for the current user.
+	 *
+	 * This method checks security validity using a nonce and returns different earn campaigns
+	 * based on user permissions.
+	 *
+	 * @return mixed The earn campaigns as an array or json response.
+	 */
 	public static function getEarnCampaigns() {
 		if ( ! WC::isSecurityValid( 'render_page_nonce' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
@@ -21,12 +29,21 @@ class Member {
 		wp_send_json_success( [ 'earn_points' => Loyalty::getDummyCampaigns() ] );
 	}
 
+	/**
+	 * Get the available redeem rewards for the current user.
+	 *
+	 * This method checks security validity using a nonce and retrieves available redeem rewards
+	 * for the user. It processes the reward list and applies necessary filters before returning
+	 * the data in a json response.
+	 *
+	 * @return mixed The redeem data as an array or json response.
+	 */
 	public static function getAvailableRedeemReward() {
 		if ( ! WC::isSecurityValid( 'render_page_nonce' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
 		}
 		if ( ! Util::isAdminSide() ) {
-			$user_email        = Loyalty::getLoginUserEmail();
+			$user_email        = WC::getLoginUserEmail();
 			$available_rewards = CustomerPage::getAvailableRewards( $user_email );
 			if ( empty( $available_rewards ) ) {
 				wp_send_json_success( [
@@ -71,13 +88,22 @@ class Member {
 		wp_send_json_success( [ 'redeem_data' => Loyalty::getDummyRewardList() ] );
 	}
 
+	/**
+	 * Get the earned coupons for the current user.
+	 *
+	 * This method checks security validity using a nonce and retrieves earned coupons for the user.
+	 * If the user is an admin, dummy coupon data is returned; otherwise, actual coupon rewards are fetched.
+	 * The coupon rewards are processed and returned as a JSON response.
+	 *
+	 * @return mixed The earned coupons as an array or json response.
+	 */
 	public static function getEarnedCoupons() {
 		if ( ! WC::isSecurityValid( 'render_page_nonce' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
 		}
 		if ( ! Util::isAdminSide() ) {
 			$user_rewards   = new UserRewards();
-			$user_email     = Loyalty::getLoginUserEmail();
+			$user_email     = WC::getLoginUserEmail();
 			$coupon_rewards = $user_rewards->getCustomerCouponRewardByEmail( $user_email, [
 				'limit'  => - 1,
 				'offset' => 0
@@ -105,6 +131,14 @@ class Member {
 		] );
 	}
 
+	/**
+	 * Get the reward opportunities for the current user.
+	 *
+	 * This method checks security validity using a nonce and returns different reward opportunities
+	 * based on user permissions.
+	 *
+	 * @return mixed The reward opportunities as an array or json response.
+	 */
 	public static function getRewardOpportunities() {
 		if ( ! WC::isSecurityValid( 'render_page_nonce' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
