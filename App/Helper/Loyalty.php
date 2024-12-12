@@ -158,9 +158,9 @@ class Loyalty {
 		switch ( $action_type ) {
 			case 'followup_share':
 				$active_campaigns->share_url     = ! empty( $point_rule->share_url ) ? $point_rule->share_url : '';
-				$active_campaigns->button_text   = __( 'Follow', 'wp-loyalty-rules' );
+				$active_campaigns->button_text   = __( 'Follow', 'wll-loyalty-launcher' );
 				$active_campaigns->is_achieved   = ! empty( $user_email ) && $campaign_id > 0 && self::isCampaignAchieved( $user_email, $campaign_id );
-				$active_campaigns->achieved_text = $active_campaigns->is_achieved ? __( 'Earned', 'wp-loyalty-rules' ) : "";
+				$active_campaigns->achieved_text = $active_campaigns->is_achieved ? __( 'Earned', 'wll-loyalty-launcher' ) : "";
 				break;
 			case 'birthday':
 				$active_campaigns->is_allow_edit           = self::canShowBirthdateField();
@@ -168,11 +168,11 @@ class Loyalty {
 				$active_campaigns->display_birth_date      = ! empty( $user->birthday_date ) && $user->birthday_date != '0000-00-00' ? Util::convertDateFormat( $user->birthday_date ) : ( ! empty( $user->birth_date ) ? Util::beforeDisplayDate( $user->birth_date ) : '' );
 				$active_campaigns->user_can_edit_birthdate = ( isset( $user->id ) && $user->id > 0 );
 				$active_campaigns->show_edit_birthday      = apply_filters( "wlr_allow_my_account_edit_birth_date", true, $active_campaigns->user_can_edit_birthdate, ! empty( $user ) ? $user : new \stdClass() );
-				$active_campaigns->edit_text               = ! empty( $active_campaigns->birth_date ) ? __( 'Edit', 'wp-loyalty-rules' ) : __( 'Set', 'wp-loyalty-rules' );
-				$active_campaigns->update_text             = __( 'Update', 'wp-loyalty-rules' );
+				$active_campaigns->edit_text               = ! empty( $active_campaigns->birth_date ) ? __( 'Edit', 'wll-loyalty-launcher' ) : __( 'Set', 'wll-loyalty-launcher' );
+				$active_campaigns->update_text             = __( 'Update', 'wll-loyalty-launcher' );
 				if ( isset( $point_rule->birthday_earn_type ) && ! empty( $point_rule->birthday_earn_type ) && $point_rule->birthday_earn_type == "update_birth_date" ) {
 					$active_campaigns->is_achieved   = ! empty( $user_email ) && $campaign_id > 0 && self::isCampaignAchieved( $user_email, $campaign_id );
-					$active_campaigns->achieved_text = $active_campaigns->is_achieved ? __( 'Earned', 'wp-loyalty-rules' ) : '';
+					$active_campaigns->achieved_text = $active_campaigns->is_achieved ? __( 'Earned', 'wll-loyalty-launcher' ) : '';
 				}
 				break;
 			case 'referral':
@@ -193,20 +193,20 @@ class Loyalty {
 				foreach ( $social_actions as $social_action ) {
 					if ( ! empty( $social_action['action_type'] ) && $social_action['action_type'] == $active_campaigns->action_type ) {
 						$active_campaigns->action_url  = ! empty( $social_action['url'] ) ? $social_action['url'] : '';
-						$active_campaigns->button_text = __( 'Share', 'wp-loyalty-rules' );
+						$active_campaigns->button_text = __( 'Share', 'wll-loyalty-launcher' );
 					}
 				}
 				$active_campaigns->is_achieved   = ! empty( $user_email ) && $campaign_id > 0 && self::isCampaignAchieved( $user_email, $campaign_id );
-				$active_campaigns->achieved_text = $active_campaigns->is_achieved ? __( 'Earned', 'wp-loyalty-rules' ) : '';
+				$active_campaigns->achieved_text = $active_campaigns->is_achieved ? __( 'Earned', 'wll-loyalty-launcher' ) : '';
 				break;
 			case 'signup':
 				$is_member_user = ( isset( $user->id ) && $user->id > 0 );
 				if ( ! $is_member_user ) {
 					$active_campaigns->action_url  = get_permalink( get_option( 'woocommerce_myaccount_page_id' ) );
-					$active_campaigns->button_text = __( 'Sign Up', 'wp-loyalty-rules' );
+					$active_campaigns->button_text = __( 'Sign Up', 'wll-loyalty-launcher' );
 				}
 				$active_campaigns->is_achieved   = ! empty( $user_email ) && $campaign_id > 0 && self::isCampaignAchieved( $user_email, $campaign_id );
-				$active_campaigns->achieved_text = $active_campaigns->is_achieved ? __( 'Earned', 'wp-loyalty-rules' ) : '';
+				$active_campaigns->achieved_text = $active_campaigns->is_achieved ? __( 'Earned', 'wll-loyalty-launcher' ) : '';
 				break;
 			default;
 		}
@@ -305,32 +305,32 @@ class Loyalty {
 			[
 				'id'          => 1,
 				'icon'        => 'point_for_purchase',
-				'title'       => __( 'Point for purchase', 'wp-loyalty-rules' ),
-				'description' => __( '+10 Points for every $1 spent', 'wp-loyalty-rules' )
+				'title'       => __( 'Point for purchase', 'wll-loyalty-launcher' ),
+				'description' => __( '+10 Points for every $1 spent', 'wll-loyalty-launcher' )
 			],
 			[
 				'id'          => 2,
 				'icon'        => 'birthday',
-				'title'       => __( 'Celebrate a birthday', 'wp-loyalty-rules' ),
-				'description' => __( '+30 points', 'wp-loyalty-rules' )
+				'title'       => __( 'Celebrate a birthday', 'wll-loyalty-launcher' ),
+				'description' => __( '+30 points', 'wll-loyalty-launcher' )
 			],
 			[
 				'id'          => 3,
 				'icon'        => 'twitter_share',
-				'title'       => __( 'Twitter Share', 'wp-loyalty-rules' ),
-				'description' => __( '+70 points', 'wp-loyalty-rules' )
+				'title'       => __( 'Twitter Share', 'wll-loyalty-launcher' ),
+				'description' => __( '+70 points', 'wll-loyalty-launcher' )
 			],
 			[
 				'id'          => 4,
 				'icon'        => 'facebook_share',
-				'title'       => __( 'Follow on Facebook', 'wp-loyalty-rules' ),
-				'description' => __( '+50 points', 'wp-loyalty-rules' )
+				'title'       => __( 'Follow on Facebook', 'wll-loyalty-launcher' ),
+				'description' => __( '+50 points', 'wll-loyalty-launcher' )
 			],
 			[
 				'id'          => 5,
 				'icon'        => 'product_review',
-				'title'       => __( 'Review a Product', 'wp-loyalty-rules' ),
-				'description' => __( '+800 points', 'wp-loyalty-rules' )
+				'title'       => __( 'Review a Product', 'wll-loyalty-launcher' ),
+				'description' => __( '+800 points', 'wll-loyalty-launcher' )
 			],
 		];
 	}
@@ -352,23 +352,23 @@ class Loyalty {
 			case 'fixed_cart':
 			case 'points_conversion':
 				if ( $user_reward->coupon_type == 'percent' ) {
-					$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%s Off', 'wp-loyalty-rules' ), $user_reward->discount_value . '%' ) : sprintf( __( '%d %s = %s Off', 'wp-loyalty-rules' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $user_reward->discount_value . '%' );
+					$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%s Off', 'wll-loyalty-launcher' ), $user_reward->discount_value . '%' ) : sprintf( __( '%d %s = %s Off', 'wll-loyalty-launcher' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $user_reward->discount_value . '%' );
 				} else {
 					$discount_value = WC::getCustomPrice( $user_reward->discount_value );
-					$text           = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%s Off', 'wp-loyalty-rules' ), $discount_value )
-						: sprintf( __( '%d %s = %s Off', 'wp-loyalty-rules' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $discount_value );
+					$text           = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%s Off', 'wll-loyalty-launcher' ), $discount_value )
+						: sprintf( __( '%d %s = %s Off', 'wll-loyalty-launcher' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $discount_value );
 				}
 
 				break;
 			case 'percent':
-				$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%d%s Off', 'wp-loyalty-rules' ), $user_reward->discount_value, '%' )
-					: sprintf( __( '%d %s = %d%s Off', 'wp-loyalty-rules' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $user_reward->discount_value, '%' );
+				$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%d%s Off', 'wll-loyalty-launcher' ), $user_reward->discount_value, '%' )
+					: sprintf( __( '%d %s = %d%s Off', 'wll-loyalty-launcher' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $user_reward->discount_value, '%' );
 				break;
 			case 'free_product':
-				$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? __( 'Free product', 'wp-loyalty-rules' ) : __( $user_reward->require_point . ' ' . self::getPointLabel( $user_reward->require_point ), 'wp-loyalty-rules' );
+				$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? __( 'Free product', 'wll-loyalty-launcher' ) : __( $user_reward->require_point . ' ' . self::getPointLabel( $user_reward->require_point ), 'wll-loyalty-launcher' );
 				break;
 			case 'free_shipping':
-				$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? __( 'Free shipping', 'wp-loyalty-rules' ) : __( $user_reward->require_point . ' ' . self::getPointLabel( $user_reward->require_point ), 'wp-loyalty-rules' );
+				$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? __( 'Free shipping', 'wll-loyalty-launcher' ) : __( $user_reward->require_point . ' ' . self::getPointLabel( $user_reward->require_point ), 'wll-loyalty-launcher' );
 				break;
 		}
 
@@ -387,11 +387,11 @@ class Loyalty {
 		$settings = get_option( 'wlr_settings', [] );
 		$singular = ! empty( $settings['wlr_point_singular_label'] ) ? $settings['wlr_point_singular_label'] : 'point';
 		if ( $label_translate ) {
-			$singular = __( $singular, 'wp-loyalty-rules' );
+			$singular = __( $singular, 'wll-loyalty-launcher' );
 		}
 		$plural = ! empty( $settings['wlr_point_label'] ) ? $settings['wlr_point_label'] : 'points';
 		if ( $label_translate ) {
-			$plural = __( $plural, 'wp-loyalty-rules' );
+			$plural = __( $plural, 'wll-loyalty-launcher' );
 		}
 		$point_label = ( $point == 0 || $point > 1 ) ? $plural : $singular;
 
@@ -424,10 +424,10 @@ class Loyalty {
 				$text = round( $discount_value ) . '%';
 				break;
 			case 'free_product':
-				$text = __( 'Free product', 'wp-loyalty-rules' );
+				$text = __( 'Free product', 'wll-loyalty-launcher' );
 				break;
 			case 'free_shipping':
-				$text = __( 'Free shipping', 'wp-loyalty-rules' );
+				$text = __( 'Free shipping', 'wll-loyalty-launcher' );
 				break;
 		}
 
@@ -451,30 +451,30 @@ class Loyalty {
 			[
 				'id'          => 1,
 				'icon'        => 'points_conversion',
-				'title'       => __( 'Point conversion', 'wp-loyalty-rules' ),
-				'description' => __( 'Covert point into coupons', 'wp-loyalty-rules' ),
-				'action_text' => __( '10 points = $15.00 Off', 'wp-loyalty-rules' ),
+				'title'       => __( 'Point conversion', 'wll-loyalty-launcher' ),
+				'description' => __( 'Covert point into coupons', 'wll-loyalty-launcher' ),
+				'action_text' => __( '10 points = $15.00 Off', 'wll-loyalty-launcher' ),
 			],
 			[
 				'id'          => 2,
 				'icon'        => 'percent',
-				'title'       => __( 'Percentage discount', 'wp-loyalty-rules' ),
-				'description' => __( 'Redeem points and get percentage discount', 'wp-loyalty-rules' ),
-				'action_text' => __( '100 points = 10% Off', 'wp-loyalty-rules' ),
+				'title'       => __( 'Percentage discount', 'wll-loyalty-launcher' ),
+				'description' => __( 'Redeem points and get percentage discount', 'wll-loyalty-launcher' ),
+				'action_text' => __( '100 points = 10% Off', 'wll-loyalty-launcher' ),
 			],
 			[
 				'id'          => 3,
 				'icon'        => 'free_shipping',
-				'title'       => __( 'Free shipping', 'wp-loyalty-rules' ),
-				'description' => __( 'Redeem points and get free shipping', 'wp-loyalty-rules' ),
-				'action_text' => __( 'free shipping', 'wp-loyalty-rules' ),
+				'title'       => __( 'Free shipping', 'wll-loyalty-launcher' ),
+				'description' => __( 'Redeem points and get free shipping', 'wll-loyalty-launcher' ),
+				'action_text' => __( 'free shipping', 'wll-loyalty-launcher' ),
 			],
 			[
 				'id'          => 4,
 				'icon'        => 'fixed_cart',
-				'title'       => __( 'Fixed discount', 'wp-loyalty-rules' ),
-				'description' => __( 'Redeem points and get fixed discount', 'wp-loyalty-rules' ),
-				'action_text' => __( '100 points = $10.00 Off', 'wp-loyalty-rules' ),
+				'title'       => __( 'Fixed discount', 'wll-loyalty-launcher' ),
+				'description' => __( 'Redeem points and get fixed discount', 'wll-loyalty-launcher' ),
+				'action_text' => __( '100 points = $10.00 Off', 'wll-loyalty-launcher' ),
 			],
 		];
 	}
@@ -498,29 +498,29 @@ class Loyalty {
 			[
 				'id'           => 1,
 				'icon'         => 'fixed_cart',
-				'title'        => __( 'Fixed discount', 'wp-loyalty-rules' ),
-				'description'  => __( 'Fixed discount description', 'wp-loyalty-rules' ),
-				'expired_text' => __( 'Expires on 2024-04-12', 'wp-loyalty-rules' ),
+				'title'        => __( 'Fixed discount', 'wll-loyalty-launcher' ),
+				'description'  => __( 'Fixed discount description', 'wll-loyalty-launcher' ),
+				'expired_text' => __( 'Expires on 2024-04-12', 'wll-loyalty-launcher' ),
 				'coupon_code'  => "wlr-cd6-jrt-eaz",
-				'action_text'  => __( '$10.00', 'wp-loyalty-rules' )
+				'action_text'  => __( '$10.00', 'wll-loyalty-launcher' )
 			],
 			[
 				'id'           => 2,
 				'icon'         => 'percent',
-				'title'        => __( 'Percentage discount', 'wp-loyalty-rules' ),
-				'description'  => __( 'Percentage discount description', 'wp-loyalty-rules' ),
-				'expired_text' => __( 'Expires on 2023-05-12', 'wp-loyalty-rules' ),
+				'title'        => __( 'Percentage discount', 'wll-loyalty-launcher' ),
+				'description'  => __( 'Percentage discount description', 'wll-loyalty-launcher' ),
+				'expired_text' => __( 'Expires on 2023-05-12', 'wll-loyalty-launcher' ),
 				'coupon_code'  => "wlr-wrs-m5a-y5q",
-				'action_text'  => __( '10%', 'wp-loyalty-rules' )
+				'action_text'  => __( '10%', 'wll-loyalty-launcher' )
 			],
 			[
 				'id'           => 3,
 				'icon'         => 'free_shipping',
-				'title'        => __( 'Free Shipping', 'wp-loyalty-rules' ),
-				'description'  => __( 'Free shipping description', 'wp-loyalty-rules' ),
+				'title'        => __( 'Free Shipping', 'wll-loyalty-launcher' ),
+				'description'  => __( 'Free shipping description', 'wll-loyalty-launcher' ),
 				'expired_text' => "",
 				'coupon_code'  => "wlr-zhn-4z6-efz",
-				'action_text'  => __( 'Free shipping', 'wp-loyalty-rules' )
+				'action_text'  => __( 'Free shipping', 'wll-loyalty-launcher' )
 			],
 
 		];
@@ -533,7 +533,7 @@ class Loyalty {
 	 * - If the user is logged in, it gets the rewards from the customer page.
 	 * - If the user is a guest, it returns an empty array.
 	 * - If no rewards are found or the rewards array is empty, a message is displayed.
-	 * - Each reward's name and description are translated using the text domain 'wp-loyalty-rules'.
+	 * - Each reward's name and description are translated using the text domain 'wll-loyalty-launcher'.
 	 *
 	 * @return array An array containing:
 	 *               - 'reward_opportunity': The list of reward opportunities.
@@ -547,16 +547,16 @@ class Loyalty {
 		if ( empty( $rewards ) || ! is_array( $rewards ) ) {
 			return [
 				'reward_opportunity' => [],
-				'message'            => sprintf( __( 'No %s found!', 'wp-loyalty-rules' ), self::getRewardLabel( 3 ) )
+				'message'            => sprintf( __( 'No %s found!', 'wll-loyalty-launcher' ), self::getRewardLabel( 3 ) )
 			];
 		}
 		foreach ( $rewards as $reward ) {
-			$reward->name        = ! empty( $reward->name ) ? __( $reward->name, 'wp-loyalty-rules' ) : '';
-			$reward->description = ! empty( $reward->description ) ? __( $reward->description, 'wp-loyalty-rules' ) : '';
+			$reward->name        = ! empty( $reward->name ) ? __( $reward->name, 'wll-loyalty-launcher' ) : '';
+			$reward->description = ! empty( $reward->description ) ? __( $reward->description, 'wll-loyalty-launcher' ) : '';
 		}
 		$message = "";
 		if ( count( $rewards ) == 0 ) {
-			$message = sprintf( __( 'No %s found!', 'wp-loyalty-rules' ), self::getRewardLabel( 3 ) );
+			$message = sprintf( __( 'No %s found!', 'wll-loyalty-launcher' ), self::getRewardLabel( 3 ) );
 		}
 
 		return apply_filters( 'wll_before_launcher_reward_opportunities', [
@@ -578,8 +578,8 @@ class Loyalty {
 	 */
 	public static function getRewardLabel( $reward_count = 0 ) {
 		$setting_option = get_option( 'wlr_settings', [] );
-		$singular       = ( ! empty( $setting_option['reward_singular_label'] ) ) ? __( $setting_option['reward_singular_label'], 'wp-loyalty-rules' ) : __( 'reward', 'wp-loyalty-rules' );
-		$plural         = ( ! empty( $setting_option['reward_plural_label'] ) ) ? __( $setting_option['reward_plural_label'], 'wp-loyalty-rules' ) : __( 'rewards', 'wp-loyalty-rules' );
+		$singular       = ( ! empty( $setting_option['reward_singular_label'] ) ) ? __( $setting_option['reward_singular_label'], 'wll-loyalty-launcher' ) : __( 'reward', 'wll-loyalty-launcher' );
+		$plural         = ( ! empty( $setting_option['reward_plural_label'] ) ) ? __( $setting_option['reward_plural_label'], 'wll-loyalty-launcher' ) : __( 'rewards', 'wll-loyalty-launcher' );
 		$reward_label   = ( $reward_count == 0 || $reward_count > 1 ) ? $plural : $singular;
 
 		return apply_filters( 'wlr_get_reward_label', $reward_label, $reward_count );
@@ -602,29 +602,29 @@ class Loyalty {
 			[
 				'id'          => 1,
 				'icon'        => 'fixed_cart',
-				'title'       => __( 'Fixed coupon discount', 'wp-loyalty-rules' ),
-				'description' => __( 'Coupon reward', 'wp-loyalty-rules' ),
+				'title'       => __( 'Fixed coupon discount', 'wll-loyalty-launcher' ),
+				'description' => __( 'Coupon reward', 'wll-loyalty-launcher' ),
 				'action_text' => '',
 			],
 			[
 				'id'          => 2,
 				'icon'        => 'percent',
-				'title'       => __( 'Percentage discount', 'wp-loyalty-rules' ),
-				'description' => __( 'Percentage discount', 'wp-loyalty-rules' ),
+				'title'       => __( 'Percentage discount', 'wll-loyalty-launcher' ),
+				'description' => __( 'Percentage discount', 'wll-loyalty-launcher' ),
 				'action_text' => '',
 			],
 			[
 				'id'          => 3,
 				'icon'        => 'free_product',
-				'title'       => __( 'Free product', 'wp-loyalty-rules' ),
-				'description' => __( 'Free product', 'wp-loyalty-rules' ),
+				'title'       => __( 'Free product', 'wll-loyalty-launcher' ),
+				'description' => __( 'Free product', 'wll-loyalty-launcher' ),
 				'action_text' => '',
 			],
 			[
 				'id'          => 4,
 				'icon'        => 'points_conversion',
-				'title'       => __( 'Points conversion', 'wp-loyalty-rules' ),
-				'description' => __( 'Points conversion', 'wp-loyalty-rules' ),
+				'title'       => __( 'Points conversion', 'wll-loyalty-launcher' ),
+				'description' => __( 'Points conversion', 'wll-loyalty-launcher' ),
 				'action_text' => '',
 			],
 		];

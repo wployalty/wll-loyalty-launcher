@@ -16,53 +16,53 @@ class Settings {
 	public static function getShortCodesWithLabels() {
 		return apply_filters( 'wll_short_code_with_labels', [
 			'common'   => [
-				[ 'value' => '{wlr_site_title}', 'label' => __( 'Displays site title', 'wp-loyalty-rules' ) ]
+				[ 'value' => '{wlr_site_title}', 'label' => __( 'Displays site title', 'wll-loyalty-launcher' ) ]
 			],
 			'guest'    => [
 				[
 					'value' => '{wlr_signup_url}',
-					'label' => __( 'Sign-up URL (Registration URL)', 'wp-loyalty-rules' )
+					'label' => __( 'Sign-up URL (Registration URL)', 'wll-loyalty-launcher' )
 				],
 				[
 					'value' => '{wlr_signin_url}',
-					'label' => __( 'Sign-in URL (The Login URL in your site)', 'wp-loyalty-rules' )
+					'label' => __( 'Sign-in URL (The Login URL in your site)', 'wll-loyalty-launcher' )
 				],
 			],
 			'member'   => [
-				[ 'value' => '{wlr_user_name}', 'label' => __( 'Displays customer’s name', 'wp-loyalty-rules' ) ],
+				[ 'value' => '{wlr_user_name}', 'label' => __( 'Displays customer’s name', 'wll-loyalty-launcher' ) ],
 				[
 					'value' => '{wlr_user_points}',
-					'label' => sprintf( __( 'Displays customer’s %s', 'wp-loyalty-rules' ), Loyalty::getPointLabel( 3 ) )
+					'label' => sprintf( __( 'Displays customer’s %s', 'wll-loyalty-launcher' ), Loyalty::getPointLabel( 3 ) )
 				],
 				[
 					'value' => '{wlr_point_label}',
-					'label' => __( 'Displays the “points label” as configured in the settings', 'wp-loyalty-rules' )
+					'label' => __( 'Displays the “points label” as configured in the settings', 'wll-loyalty-launcher' )
 				],
 			],
 			'referral' => [
 				[
 					'value' => '{wlr_referral_advocate_point}',
-					'label' => sprintf( __( 'Displays %s reward for existing customers / advocates as configured in the referral campaign', 'wp-loyalty-rules' ), Loyalty::getPointLabel( 3 ) )
+					'label' => sprintf( __( 'Displays %s reward for existing customers / advocates as configured in the referral campaign', 'wll-loyalty-launcher' ), Loyalty::getPointLabel( 3 ) )
 				],
 				[
 					'value' => '{wlr_referral_advocate_point_percentage}',
-					'label' => sprintf( __( 'Displays %s percentage for existing customers / advocates as configured in the referral campaign', 'wp-loyalty-rules' ), Loyalty::getPointLabel( 3 ) )
+					'label' => sprintf( __( 'Displays %s percentage for existing customers / advocates as configured in the referral campaign', 'wll-loyalty-launcher' ), Loyalty::getPointLabel( 3 ) )
 				],
 				[
 					'value' => '{wlr_referral_advocate_reward}',
-					'label' => __( 'Displays any direct coupon rewards for existing customers / advocates as configured in the referral campaign', 'wp-loyalty-rules' )
+					'label' => __( 'Displays any direct coupon rewards for existing customers / advocates as configured in the referral campaign', 'wll-loyalty-launcher' )
 				],
 				[
 					'value' => '{wlr_referral_friend_point}',
-					'label' => sprintf( __( 'Displays %s reward for friends as configured in the referral campaign', 'wp-loyalty-rules' ), Loyalty::getPointLabel( 3 ) )
+					'label' => sprintf( __( 'Displays %s reward for friends as configured in the referral campaign', 'wll-loyalty-launcher' ), Loyalty::getPointLabel( 3 ) )
 				],
 				[
 					'value' => '{wlr_referral_friend_point_percentage}',
-					'label' => sprintf( __( 'Displays %s percentage for friends as configured in the referral campaign', 'wp-loyalty-rules' ), Loyalty::getPointLabel( 3 ) )
+					'label' => sprintf( __( 'Displays %s percentage for friends as configured in the referral campaign', 'wll-loyalty-launcher' ), Loyalty::getPointLabel( 3 ) )
 				],
 				[
 					'value' => '{wlr_referral_friend_reward}',
-					'label' => __( 'Displays any direct coupon reward for friends as configured in the referral campaign', 'wp-loyalty-rules' )
+					'label' => __( 'Displays any direct coupon reward for friends as configured in the referral campaign', 'wll-loyalty-launcher' )
 				],
 			],
 		] );
@@ -397,7 +397,7 @@ class Settings {
 		];
 		array_walk_recursive( $text_data, function ( &$value, $key ) use ( $is_admin_side ) {
 			/*$is_admin_side = isset($is_admin_side) && is_bool($is_admin_side) && $is_admin_side;*/
-			$value = ( ! $is_admin_side ) ? __( $value, 'wp-loyalty-rules' ) : $value;
+			$value = ( ! $is_admin_side ) ? __( $value, 'wll-loyalty-launcher' ) : $value;
 		} );
 		$data = [
 			'launcher' => [

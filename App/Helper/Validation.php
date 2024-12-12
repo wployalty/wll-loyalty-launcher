@@ -59,7 +59,7 @@ class Validation {
 		Validator::addRule( 'sanitizeText', [
 			self::class,
 			'validateSanitizeText'
-		], __( 'Invalid characters', 'wp-loyalty-rules' ) );
+		], __( 'Invalid characters', 'wll-loyalty-launcher' ) );
 
 		$required_fields = $sanitize_text = [];
 		if ( ! empty( $post['design'] ) && is_array( $post['design'] ) ) {
@@ -85,7 +85,7 @@ class Validation {
 				}
 			}
 		}
-		$validator->rule( 'required', $required_fields )->message( __( '{field} is required', 'wp-loyalty-rules' ) );
+		$validator->rule( 'required', $required_fields )->message( __( '{field} is required', 'wll-loyalty-launcher' ) );
 		$validator->rule( 'sanitizeText', $sanitize_text );
 
 		return $validator->validate() ? true : $validator->errors();
@@ -238,27 +238,27 @@ class Validation {
 		Validator::addRule( 'cleanHtml', [
 			self::class,
 			'validateCleanHtml'
-		], __( 'Invalid characters', 'wp-loyalty-rules' ) );
+		], __( 'Invalid characters', 'wll-loyalty-launcher' ) );
 
 		Validator::addRule( 'number', [
 			self::class,
 			'validateNumber'
-		], __( 'must contain only numbers 0-9', 'wp-loyalty-rules' ) );
+		], __( 'must contain only numbers 0-9', 'wll-loyalty-launcher' ) );
 
 		Validator::addRule( 'sanitizeText', [
 			self::class,
 			'validateSanitizeText'
-		], __( 'Invalid characters', 'wp-loyalty-rules' ) );
+		], __( 'Invalid characters', 'wll-loyalty-launcher' ) );
 
 		Validator::addRule( 'validateGuestShortcodes', [
 			self::class,
 			'validateNotAllowedGuestShortcode'
-		], __( 'has invalid shortcodes.', 'wp-loyalty-rules' ) );
+		], __( 'has invalid shortcodes.', 'wll-loyalty-launcher' ) );
 
 		Validator::addRule( 'validateMemberShortcodes', [
 			self::class,
 			'validateNotAllowedMemberShortcode'
-		], __( 'has invalid shortcodes.', 'wp-loyalty-rules' ) );
+		], __( 'has invalid shortcodes.', 'wll-loyalty-launcher' ) );
 
 		$sanitize_text = $required_and_clean = $clean_html = $guest_shortcode = $member_shortcode = [];
 		if ( ! empty( $post['content'] ) && is_array( $post['content'] ) && ! empty( $post['content']['guest'] ) && is_array( $post['content']['guest'] ) ) {
@@ -322,7 +322,7 @@ class Validation {
 				}
 			}
 		}
-		$validator->rule( 'required', $required_and_clean )->message( __( '{field} is required', 'wp-loyalty-rules' ) );
+		$validator->rule( 'required', $required_and_clean )->message( __( '{field} is required', 'wll-loyalty-launcher' ) );
 		$validator->rule( 'cleanHtml', $required_and_clean );
 		$validator->rule( 'cleanHtml', $clean_html );
 		$validator->rule( 'sanitizeText', $sanitize_text );
@@ -399,37 +399,37 @@ class Validation {
 		Validator::addRule( 'cleanHtml', [
 			self::class,
 			'validateCleanHtml'
-		], __( 'Invalid characters', 'wp-loyalty-rules' ) );
+		], __( 'Invalid characters', 'wll-loyalty-launcher' ) );
 
 		Validator::addRule( 'number', [
 			self::class,
 			'validateNumber'
-		], __( 'must contain only numbers 0-9', 'wp-loyalty-rules' ) );
+		], __( 'must contain only numbers 0-9', 'wll-loyalty-launcher' ) );
 
 		Validator::addRule( 'sanitizeText', [
 			self::class,
 			'validateSanitizeText'
-		], __( 'Invalid characters', 'wp-loyalty-rules' ) );
+		], __( 'Invalid characters', 'wll-loyalty-launcher' ) );
 
 		Validator::addRule( 'validateGuestShortcodes', [
 			self::class,
 			'validateNotAllowedGuestShortcode'
-		], __( 'has invalid shortcodes.', 'wp-loyalty-rules' ) );
+		], __( 'has invalid shortcodes.', 'wll-loyalty-launcher' ) );
 
 		Validator::addRule( 'validateMemberShortcodes', [
 			self::class,
 			'validateNotAllowedMemberShortcode'
-		], __( 'has invalid shortcodes.', 'wp-loyalty-rules' ) );
+		], __( 'has invalid shortcodes.', 'wll-loyalty-launcher' ) );
 
 		Validator::addRule( 'validateUrlContains', [
 			self::class,
 			'validateUrlContains'
-		], __( 'has invalid shortcodes.', 'wp-loyalty-rules' ) );
+		], __( 'has invalid shortcodes.', 'wll-loyalty-launcher' ) );
 
 		Validator::addRule( 'isEmpty', [
 			self::class,
 			'validateIsEmpty'
-		], __( 'is empty', 'wp-loyalty-rules' ) );
+		], __( 'is empty', 'wll-loyalty-launcher' ) );
 
 		$required_fields = $clean_html = $sanitize_text = $shortcode_check = [];
 		if ( ! empty( $post['launcher'] ) && is_array( $post['launcher'] ) ) {
@@ -495,11 +495,11 @@ class Validation {
 				}
 			}
 			$validator->labels( $condition_label );
-			$validator->rule( 'isEmpty', $empty_check )->message( __( '{field} has empty value', 'wp-loyalty-rules' ) );
-			$validator->rule( 'cleanHtml', $condition_clean )->message( __( '{field} has invalid characters', 'wp-loyalty-rules' ) );
-			$validator->rule( 'validateUrlContains', $condition_clean )->message( __( '{field} has invalid characters', 'wp-loyalty-rules' ) );
+			$validator->rule( 'isEmpty', $empty_check )->message( __( '{field} has empty value', 'wll-loyalty-launcher' ) );
+			$validator->rule( 'cleanHtml', $condition_clean )->message( __( '{field} has invalid characters', 'wll-loyalty-launcher' ) );
+			$validator->rule( 'validateUrlContains', $condition_clean )->message( __( '{field} has invalid characters', 'wll-loyalty-launcher' ) );
 		}
-		$validator->rule( 'required', $required_fields )->message( __( '{field} is required', 'wp-loyalty-rules' ) );
+		$validator->rule( 'required', $required_fields )->message( __( '{field} is required', 'wll-loyalty-launcher' ) );
 		$validator->rule( 'cleanHtml', $clean_html );
 		$validator->rule( 'sanitizeText', $sanitize_text );
 		$validator->rule( 'validateGuestShortcodes', $shortcode_check );

@@ -46,7 +46,7 @@ class Guest {
 			],
 		];
 		array_walk_recursive( $short_code_data, function ( &$value, $key ) use ( $is_admin_side ) {
-			$value = ( ! $is_admin_side ) ? __( $value, 'wp-loyalty-rules' ) : $value;
+			$value = ( ! $is_admin_side ) ? __( $value, 'wll-loyalty-launcher' ) : $value;
 			$value = ( ! $is_admin_side ) ? Settings::processShortCodes( $value ) : $value;
 		} );
 

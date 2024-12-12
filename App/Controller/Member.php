@@ -48,13 +48,13 @@ class Member {
 			if ( empty( $available_rewards ) ) {
 				wp_send_json_success( [
 					'redeem_data' => [],
-					'message'     => sprintf( __( 'No %s found!', 'wp-loyalty-rules' ), Loyalty::getRewardLabel( 3 ) )
+					'message'     => sprintf( __( 'No %s found!', 'wll-loyalty-launcher' ), Loyalty::getRewardLabel( 3 ) )
 				] );
 			}
 			foreach ( $available_rewards as $user_reward ) {
-				$user_reward->name        = ! empty( $user_reward->name ) ? __( $user_reward->name, 'wp-loyalty-rules' ) : '';
-				$user_reward->description = ! empty( $user_reward->description ) ? __( $user_reward->description, 'wp-loyalty-rules' ) : '';
-				$user_reward->button_text = __( 'Redeem', 'wp-loyalty-rules' );
+				$user_reward->name        = ! empty( $user_reward->name ) ? __( $user_reward->name, 'wll-loyalty-launcher' ) : '';
+				$user_reward->description = ! empty( $user_reward->description ) ? __( $user_reward->description, 'wll-loyalty-launcher' ) : '';
+				$user_reward->button_text = __( 'Redeem', 'wll-loyalty-launcher' );
 				$user_reward->action_text = Loyalty::getUserRewardText( $user_reward );
 				if ( ! empty( $user_reward->discount_code ) ) {
 					$user_reward->button_text = "";
@@ -68,7 +68,7 @@ class Member {
 				}
 				$user_reward->expiry_date_text = "";
 				if ( ! empty( $user_reward->expiry_date ) && ! empty( $user_reward->discount_code ) ) {
-					$user_reward->expiry_date_text = sprintf( __( 'Expires on %s', "wp-loyalty-rules" ), $user_reward->expiry_date );
+					$user_reward->expiry_date_text = sprintf( __( 'Expires on %s', "wll-loyalty-launcher" ), $user_reward->expiry_date );
 				}
 				if ( empty( $user_reward->discount_code ) ) {
 					$user_reward->is_show_reward = 1;
@@ -113,7 +113,7 @@ class Member {
 			if ( empty( $coupon_rewards ) ) {
 				wp_send_json_success( [
 					'redeem_coupons' => [],
-					'message'        => __( 'No coupons found!', 'wp-loyalty-rules' )
+					'message'        => __( 'No coupons found!', 'wll-loyalty-launcher' )
 				] );
 			}
 			$coupon_rewards = array_values( $coupon_rewards );// For React, key must start from 0

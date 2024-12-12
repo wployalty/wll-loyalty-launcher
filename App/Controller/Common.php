@@ -126,8 +126,8 @@ class Common {
 			update_option( 'wll_is_launcher_plugin_activated', true );
 		}
 		$add_ons['wll-loyalty-launcher'] = [
-			'name'         => esc_html__( 'WPLoyalty - Launcher', 'wp-loyalty-rules' ),
-			'description'  => __( 'Launcher widget for WPLoyalty. Let your customers easily discover your loyalty rewards.', 'wp-loyalty-rules' ),
+			'name'         => esc_html__( 'WPLoyalty - Launcher', 'wll-loyalty-launcher' ),
+			'description'  => __( 'Launcher widget for WPLoyalty. Let your customers easily discover your loyalty rewards.', 'wll-loyalty-launcher' ),
 			'icon_url'     => \Wlr\App\Helpers\Util::getImageUrl( 'wp-loyalty-launcher' ),
 			'page_url'     => '',
 			'document_url' => '',
@@ -290,24 +290,24 @@ class Common {
 		$settings['available_point']              = ( ! empty( $user->points ) ) ? $user->points : 0;
 		$settings['labels']                       = apply_filters( 'wll_launcher_widget_labels', [
 			'birth_date_label'        => [
-				'day'   => __( 'Day', 'wp-loyalty-rules' ),
-				'month' => __( 'Month', 'wp-loyalty-rules' ),
-				'year'  => __( 'Year', 'wp-loyalty-rules' ),
+				'day'   => __( 'Day', 'wll-loyalty-launcher' ),
+				'month' => __( 'Month', 'wll-loyalty-launcher' ),
+				'year'  => __( 'Year', 'wll-loyalty-launcher' ),
 			],
 			'footer'                  => [
-				"powered_by"            => __( 'Powered by', 'wp-loyalty-rules' ),
+				"powered_by"            => __( 'Powered by', 'wll-loyalty-launcher' ),
 				'launcher_power_by_url' => 'https://wployalty.net/?utm_campaign=wployalty-link&utm_medium=launcher&utm_source=powered_by',
-				"title"                 => __( 'WPLoyalty', "wp-loyalty-rules" ),
+				"title"                 => __( 'WPLoyalty', "wll-loyalty-launcher" ),
 			],
 			'reward_text'             => ucfirst( Loyalty::getRewardLabel( 3 ) ),
-			'coupon_text'             => __( 'Coupons', 'wp-loyalty-rules' ),
-			'loading_text'            => __( 'Loading...', 'wp-loyalty-rules' ),
-			'loading_timer_text'      => __( 'If loading takes a while, please refresh the screen...!', 'wp-loyalty-rules' ),
-			'reward_opportunity_text' => sprintf( __( '%s Opportunities', 'wp-loyalty-rules' ), ucfirst( Loyalty::getRewardLabel() ) ),
-			'my_rewards_text'         => sprintf( __( 'My %s', 'wp-loyalty-rules' ), ucfirst( Loyalty::getRewardLabel( 3 ) ) ),
-			'apply_button_text'       => __( 'Apply', 'wp-loyalty-rules' ),
-			'read_more_text'          => __( 'Read more', 'wp-loyalty-rules' ),
-			'read_less_text'          => __( 'Read less', 'wp-loyalty-rules' ),
+			'coupon_text'             => __( 'Coupons', 'wll-loyalty-launcher' ),
+			'loading_text'            => __( 'Loading...', 'wll-loyalty-launcher' ),
+			'loading_timer_text'      => __( 'If loading takes a while, please refresh the screen...!', 'wll-loyalty-launcher' ),
+			'reward_opportunity_text' => sprintf( __( '%s Opportunities', 'wll-loyalty-launcher' ), ucfirst( Loyalty::getRewardLabel() ) ),
+			'my_rewards_text'         => sprintf( __( 'My %s', 'wll-loyalty-launcher' ), ucfirst( Loyalty::getRewardLabel( 3 ) ) ),
+			'apply_button_text'       => __( 'Apply', 'wll-loyalty-launcher' ),
+			'read_more_text'          => __( 'Read more', 'wll-loyalty-launcher' ),
+			'read_less_text'          => __( 'Read less', 'wll-loyalty-launcher' ),
 		] );
 		$settings['nonces']                       = [
 			'render_page_nonce'   => WC::createNonce( 'render_page_nonce' ),
