@@ -49,7 +49,7 @@ defined( 'WLL_PLUGIN_NAME' ) or define( 'WLL_PLUGIN_NAME', 'WPLoyalty - Launcher
 defined( 'WLL_MINIMUM_PHP_VERSION' ) or define( 'WLL_MINIMUM_PHP_VERSION', '7.4.0' );
 defined( 'WLL_MINIMUM_WP_VERSION' ) or define( 'WLL_MINIMUM_WP_VERSION', '4.9' );
 defined( 'WLL_MINIMUM_WC_VERSION' ) or define( 'WLL_MINIMUM_WC_VERSION', '6.0' );
-defined( 'WLL_MINIMUM_WLR_VERSION' ) or define( 'WLL_MINIMUM_WLR_VERSION', '1.2.0' );
+defined( 'WLL_MINIMUM_WLR_VERSION' ) or define( 'WLL_MINIMUM_WLR_VERSION', '1.3.0' );
 defined( 'WLL_PLUGIN_VERSION' ) or define( 'WLL_PLUGIN_VERSION', '1.0.0' );
 defined( 'WLL_PLUGIN_SLUG' ) or define( 'WLL_PLUGIN_SLUG', 'wll-loyalty-launcher' );
 defined( 'WLL_PLUGIN_FILE' ) or define( 'WLL_PLUGIN_FILE', __FILE__ );
