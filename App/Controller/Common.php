@@ -160,7 +160,6 @@ class Common {
 			$protocol = "http://";
 		}
 		$current_url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
 		foreach ( $show_condition as $condition ) {
 			if ( empty( $condition['operator']['value'] ) ) {
 				$all_condition_status[] = false;

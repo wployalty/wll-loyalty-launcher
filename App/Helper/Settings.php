@@ -184,6 +184,9 @@ class Settings {
 				$short_code_list['{wlr_referral_friend_point_percentage}']   = ! empty( $referral_points['friend_point_percentage'] ) ? $referral_points['friend_point_percentage'] . ' %' : '0 %';
 				$short_code_list['{wlr_referral_friend_reward}']             = ! empty( $referral_points['friend_reward'] ) ? implode( ',', $referral_points['friend_reward'] ) : '';
 			}
+			$my_account_url                      = get_permalink( get_option( 'woocommerce_myaccount_page_id' ) );
+			$short_code_list['{wlr_signup_url}'] = $my_account_url;
+			$short_code_list['{wlr_signin_url}'] = $my_account_url;
 		}
 
 		return apply_filters( 'wlr_launcher_short_code_list', $short_code_list );
@@ -280,7 +283,7 @@ class Settings {
 					],
 				],
 				'branding' => [
-					'is_show' => Loyalty::isPro() ? Settings::opt( 'design.branding.is_show', 'none' ) : 'show',
+					'is_show' => Loyalty::isPro() ? Settings::opt( 'design.branding.is_show', 'show' ) : 'show',
 				]
 			]
 		] );
