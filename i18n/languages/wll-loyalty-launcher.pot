@@ -9,13 +9,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-12-11T06:27:44+00:00\n"
+"POT-Creation-Date: 2024-12-19T11:20:41+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: wll-loyalty-launcher\n"
 
 #. Plugin Name of the plugin
 #: wll-loyalty-launcher.php
+#: App/Controller/Common.php:129
 msgid "WPLoyalty - Launcher"
 msgstr ""
 
@@ -26,6 +27,7 @@ msgstr ""
 
 #. Description of the plugin
 #: wll-loyalty-launcher.php
+#: App/Controller/Common.php:130
 msgid "Launcher widget for WPLoyalty. Let your customers easily discover your loyalty rewards."
 msgstr ""
 
@@ -43,14 +45,14 @@ msgstr ""
 #: App/Controller/Admin/Labels.php:56
 #: App/Controller/Admin/Settings.php:23
 #: App/Controller/Admin/Settings.php:46
-#: App/Controller/Admin/Settings.php:73
-#: App/Controller/Admin/Settings.php:100
-#: App/Controller/Guest.php:14
-#: App/Controller/Guest.php:24
-#: App/Controller/Member.php:16
-#: App/Controller/Member.php:26
-#: App/Controller/Member.php:76
-#: App/Controller/Member.php:110
+#: App/Controller/Admin/Settings.php:80
+#: App/Controller/Admin/Settings.php:114
+#: App/Controller/Guest.php:19
+#: App/Controller/Guest.php:39
+#: App/Controller/Member.php:24
+#: App/Controller/Member.php:43
+#: App/Controller/Member.php:102
+#: App/Controller/Member.php:144
 msgid "Basic check failed"
 msgstr ""
 
@@ -115,7 +117,7 @@ msgid "Content"
 msgstr ""
 
 #: App/Controller/Admin/Labels.php:98
-#: App/Controller/Admin/Labels.php:268
+#: App/Controller/Admin/Labels.php:273
 msgid "Launcher"
 msgstr ""
 
@@ -276,6 +278,7 @@ msgid "Earn"
 msgstr ""
 
 #: App/Controller/Admin/Labels.php:152
+#: App/Controller/Member.php:57
 msgid "Redeem"
 msgstr ""
 
@@ -304,10 +307,12 @@ msgid "This preview uses dummy records."
 msgstr ""
 
 #: App/Controller/Admin/Labels.php:159
+#: App/Controller/Common.php:299
 msgid "Powered by"
 msgstr ""
 
 #: App/Controller/Admin/Labels.php:160
+#: App/Controller/Common.php:301
 msgid "WPLoyalty"
 msgstr ""
 
@@ -321,6 +326,7 @@ msgid "My Coupons"
 msgstr ""
 
 #: App/Controller/Admin/Labels.php:163
+#: App/Controller/Common.php:309
 msgid "Apply"
 msgstr ""
 
@@ -464,101 +470,360 @@ msgstr ""
 msgid "Point description"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:269
+#: App/Controller/Admin/Labels.php:274
 msgid "Edit Launcher"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:270
+#: App/Controller/Admin/Labels.php:275
 msgid "APPEARANCE"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:271
-#: App/Controller/Admin/Labels.php:278
+#: App/Controller/Admin/Labels.php:276
+#: App/Controller/Admin/Labels.php:283
 msgid "Icon with text"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:272
-#: App/Controller/Admin/Labels.php:279
+#: App/Controller/Admin/Labels.php:277
+#: App/Controller/Admin/Labels.php:284
 msgid "Icon only"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:273
-#: App/Controller/Admin/Labels.php:280
+#: App/Controller/Admin/Labels.php:278
+#: App/Controller/Admin/Labels.php:285
 msgid "Text only"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:274
+#: App/Controller/Admin/Labels.php:279
 msgid "Icon only on mobile"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:283
+#: App/Controller/Admin/Labels.php:288
 msgid "View option"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:286
+#: App/Controller/Admin/Labels.php:291
 msgid "Both mobile and desktop"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:289
+#: App/Controller/Admin/Labels.php:294
 msgid "Mobile only"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:290
+#: App/Controller/Admin/Labels.php:295
 msgid "Desktop only"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:292
+#: App/Controller/Admin/Labels.php:297
 msgid "Font"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:304
+#: App/Controller/Admin/Labels.php:309
 msgid "Inherit"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:305
+#: App/Controller/Admin/Labels.php:310
 msgid "Helvetica Neue"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:306
+#: App/Controller/Admin/Labels.php:311
 msgid "Arial"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:307
+#: App/Controller/Admin/Labels.php:312
 msgid "Courier New"
 msgstr ""
 
-#: App/Controller/Admin/Labels.php:308
+#: App/Controller/Admin/Labels.php:313
 msgid "Impact"
 msgstr ""
 
 #: App/Controller/Admin/Settings.php:50
 #: App/Controller/Admin/Settings.php:54
 #: App/Controller/Admin/Settings.php:63
-#: App/Controller/Admin/Settings.php:77
-#: App/Controller/Admin/Settings.php:81
-#: App/Controller/Admin/Settings.php:90
-#: App/Controller/Admin/Settings.php:104
-#: App/Controller/Admin/Settings.php:108
-#: App/Controller/Admin/Settings.php:116
+#: App/Controller/Admin/Settings.php:84
+#: App/Controller/Admin/Settings.php:88
+#: App/Controller/Admin/Settings.php:97
+#: App/Controller/Admin/Settings.php:118
+#: App/Controller/Admin/Settings.php:122
+#: App/Controller/Admin/Settings.php:130
 msgid "Settings not saved!"
 msgstr ""
 
 #: App/Controller/Admin/Settings.php:68
-#: App/Controller/Admin/Settings.php:95
-#: App/Controller/Admin/Settings.php:121
+#: App/Controller/Admin/Settings.php:102
+#: App/Controller/Admin/Settings.php:135
 msgid "Settings saved!"
 msgstr ""
 
-#: App/Helper/Loyalty.php:74
-#: App/Helper/Loyalty.php:98
+#: App/Controller/Common.php:294
+msgid "Day"
+msgstr ""
+
+#: App/Controller/Common.php:295
+msgid "Month"
+msgstr ""
+
+#: App/Controller/Common.php:296
+msgid "Year"
+msgstr ""
+
+#: App/Controller/Common.php:304
+msgid "Coupons"
+msgstr ""
+
+#: App/Controller/Common.php:305
+msgid "Loading..."
+msgstr ""
+
+#: App/Controller/Common.php:306
+msgid "If loading takes a while, please refresh the screen...!"
+msgstr ""
+
+#: App/Controller/Common.php:307
+msgid "%s Opportunities"
+msgstr ""
+
+#: App/Controller/Common.php:308
+msgid "My %s"
+msgstr ""
+
+#: App/Controller/Common.php:310
+msgid "Read more"
+msgstr ""
+
+#: App/Controller/Common.php:311
+msgid "Read less"
+msgstr ""
+
+#: App/Controller/Guest.php:52
+#: App/Controller/Member.php:51
+#: App/Helper/Loyalty.php:550
+#: App/Helper/Loyalty.php:559
+msgid "No %s found!"
+msgstr ""
+
+#: App/Controller/Member.php:71
+msgid "Expires on %s"
+msgstr ""
+
+#: App/Controller/Member.php:116
+msgid "No coupons found!"
+msgstr ""
+
+#: App/Helper/Loyalty.php:95
+#: App/Helper/Loyalty.php:119
 msgid "Create a first campaign."
 msgstr ""
 
-#: App/Helper/Member.php:120
+#: App/Helper/Loyalty.php:161
+msgid "Follow"
+msgstr ""
+
+#: App/Helper/Loyalty.php:163
+#: App/Helper/Loyalty.php:175
+#: App/Helper/Loyalty.php:200
+#: App/Helper/Loyalty.php:209
+msgid "Earned"
+msgstr ""
+
+#: App/Helper/Loyalty.php:171
+msgid "Edit"
+msgstr ""
+
+#: App/Helper/Loyalty.php:171
+msgid "Set"
+msgstr ""
+
+#: App/Helper/Loyalty.php:172
+msgid "Update"
+msgstr ""
+
+#: App/Helper/Loyalty.php:196
+msgid "Share"
+msgstr ""
+
+#: App/Helper/Loyalty.php:206
+msgid "Sign Up"
+msgstr ""
+
+#: App/Helper/Loyalty.php:308
+msgid "Point for purchase"
+msgstr ""
+
+#: App/Helper/Loyalty.php:309
+msgid "+10 Points for every $1 spent"
+msgstr ""
+
+#: App/Helper/Loyalty.php:314
+msgid "Celebrate a birthday"
+msgstr ""
+
+#: App/Helper/Loyalty.php:315
+msgid "+30 points"
+msgstr ""
+
+#: App/Helper/Loyalty.php:320
+msgid "Twitter Share"
+msgstr ""
+
+#: App/Helper/Loyalty.php:321
+msgid "+70 points"
+msgstr ""
+
+#: App/Helper/Loyalty.php:326
+msgid "Follow on Facebook"
+msgstr ""
+
+#: App/Helper/Loyalty.php:327
+msgid "+50 points"
+msgstr ""
+
+#: App/Helper/Loyalty.php:332
+msgid "Review a Product"
+msgstr ""
+
+#: App/Helper/Loyalty.php:333
+msgid "+800 points"
+msgstr ""
+
+#: App/Helper/Loyalty.php:355
+#: App/Helper/Loyalty.php:358
+msgid "%s Off"
+msgstr ""
+
+#: App/Helper/Loyalty.php:355
+#: App/Helper/Loyalty.php:359
+msgid "%d %s = %s Off"
+msgstr ""
+
+#: App/Helper/Loyalty.php:364
+msgid "%d%s Off"
+msgstr ""
+
+#: App/Helper/Loyalty.php:365
+msgid "%d %s = %d%s Off"
+msgstr ""
+
+#: App/Helper/Loyalty.php:368
+#: App/Helper/Loyalty.php:427
+#: App/Helper/Loyalty.php:619
+#: App/Helper/Loyalty.php:620
+msgid "Free product"
+msgstr ""
+
+#: App/Helper/Loyalty.php:371
+#: App/Helper/Loyalty.php:430
+#: App/Helper/Loyalty.php:468
+#: App/Helper/Loyalty.php:523
+msgid "Free shipping"
+msgstr ""
+
+#: App/Helper/Loyalty.php:454
+msgid "Point conversion"
+msgstr ""
+
+#: App/Helper/Loyalty.php:455
+msgid "Covert point into coupons"
+msgstr ""
+
+#: App/Helper/Loyalty.php:456
+msgid "10 points = $15.00 Off"
+msgstr ""
+
+#: App/Helper/Loyalty.php:461
+#: App/Helper/Loyalty.php:510
+#: App/Helper/Loyalty.php:612
+#: App/Helper/Loyalty.php:613
+msgid "Percentage discount"
+msgstr ""
+
+#: App/Helper/Loyalty.php:462
+msgid "Redeem points and get percentage discount"
+msgstr ""
+
+#: App/Helper/Loyalty.php:463
+msgid "100 points = 10% Off"
+msgstr ""
+
+#: App/Helper/Loyalty.php:469
+msgid "Redeem points and get free shipping"
+msgstr ""
+
+#: App/Helper/Loyalty.php:470
+msgid "free shipping"
+msgstr ""
+
+#: App/Helper/Loyalty.php:475
+#: App/Helper/Loyalty.php:501
+msgid "Fixed discount"
+msgstr ""
+
+#: App/Helper/Loyalty.php:476
+msgid "Redeem points and get fixed discount"
+msgstr ""
+
+#: App/Helper/Loyalty.php:477
+msgid "100 points = $10.00 Off"
+msgstr ""
+
+#: App/Helper/Loyalty.php:502
+msgid "Fixed discount description"
+msgstr ""
+
+#: App/Helper/Loyalty.php:503
+msgid "Expires on 2024-04-12"
+msgstr ""
+
+#: App/Helper/Loyalty.php:505
+msgid "$10.00"
+msgstr ""
+
+#: App/Helper/Loyalty.php:511
+msgid "Percentage discount description"
+msgstr ""
+
+#: App/Helper/Loyalty.php:512
+msgid "Expires on 2023-05-12"
+msgstr ""
+
+#: App/Helper/Loyalty.php:514
+msgid "10%"
+msgstr ""
+
+#: App/Helper/Loyalty.php:519
+msgid "Free Shipping"
+msgstr ""
+
+#: App/Helper/Loyalty.php:520
+msgid "Free shipping description"
+msgstr ""
+
+#: App/Helper/Loyalty.php:581
+msgid "reward"
+msgstr ""
+
+#: App/Helper/Loyalty.php:582
+msgid "rewards"
+msgstr ""
+
+#: App/Helper/Loyalty.php:605
+msgid "Fixed coupon discount"
+msgstr ""
+
+#: App/Helper/Loyalty.php:606
+msgid "Coupon reward"
+msgstr ""
+
+#: App/Helper/Loyalty.php:626
+#: App/Helper/Loyalty.php:627
+msgid "Points conversion"
+msgstr ""
+
+#: App/Helper/Member.php:134
 msgid "%d %s more needed to unlock next level"
 msgstr ""
 
-#: App/Helper/Member.php:124
+#: App/Helper/Member.php:138
 msgid "Congratulations! You have reached the final level"
 msgstr ""
 
@@ -587,10 +852,98 @@ msgstr ""
 msgid "%1$s requires minimum loyalty version %2$s"
 msgstr ""
 
-#: App/Helper/Validation.php:37
-#: App/Helper/Validation.php:179
-#: App/Helper/Validation.php:314
+#: App/Helper/Settings.php:19
+msgid "Displays site title"
+msgstr ""
+
+#: App/Helper/Settings.php:24
+msgid "Sign-up URL (Registration URL)"
+msgstr ""
+
+#: App/Helper/Settings.php:28
+msgid "Sign-in URL (The Login URL in your site)"
+msgstr ""
+
+#: App/Helper/Settings.php:32
+msgid "Displays customer’s name"
+msgstr ""
+
+#: App/Helper/Settings.php:35
+msgid "Displays customer’s %s"
+msgstr ""
+
+#: App/Helper/Settings.php:39
+msgid "Displays the “points label” as configured in the settings"
+msgstr ""
+
+#: App/Helper/Settings.php:45
+msgid "Displays %s reward for existing customers / advocates as configured in the referral campaign"
+msgstr ""
+
+#: App/Helper/Settings.php:49
+msgid "Displays %s percentage for existing customers / advocates as configured in the referral campaign"
+msgstr ""
+
+#: App/Helper/Settings.php:53
+msgid "Displays any direct coupon rewards for existing customers / advocates as configured in the referral campaign"
+msgstr ""
+
+#: App/Helper/Settings.php:57
+msgid "Displays %s reward for friends as configured in the referral campaign"
+msgstr ""
+
+#: App/Helper/Settings.php:61
+msgid "Displays %s percentage for friends as configured in the referral campaign"
+msgstr ""
+
+#: App/Helper/Settings.php:65
+msgid "Displays any direct coupon reward for friends as configured in the referral campaign"
+msgstr ""
+
+#: App/Helper/Validation.php:54
+#: App/Helper/Validation.php:233
+#: App/Helper/Validation.php:395
 msgid "This field"
+msgstr ""
+
+#: App/Helper/Validation.php:62
+#: App/Helper/Validation.php:241
+#: App/Helper/Validation.php:251
+#: App/Helper/Validation.php:402
+#: App/Helper/Validation.php:412
+msgid "Invalid characters"
+msgstr ""
+
+#: App/Helper/Validation.php:88
+#: App/Helper/Validation.php:325
+#: App/Helper/Validation.php:502
+msgid "{field} is required"
+msgstr ""
+
+#: App/Helper/Validation.php:246
+#: App/Helper/Validation.php:407
+msgid "must contain only numbers 0-9"
+msgstr ""
+
+#: App/Helper/Validation.php:256
+#: App/Helper/Validation.php:261
+#: App/Helper/Validation.php:417
+#: App/Helper/Validation.php:422
+#: App/Helper/Validation.php:427
+msgid "has invalid shortcodes."
+msgstr ""
+
+#: App/Helper/Validation.php:432
+msgid "is empty"
+msgstr ""
+
+#: App/Helper/Validation.php:498
+msgid "{field} has empty value"
+msgstr ""
+
+#: App/Helper/Validation.php:499
+#: App/Helper/Validation.php:500
+msgid "{field} has invalid characters"
 msgstr ""
 
 #: App/Setup.php:57

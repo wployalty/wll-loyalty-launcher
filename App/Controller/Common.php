@@ -128,7 +128,7 @@ class Common {
 		$add_ons['wll-loyalty-launcher'] = [
 			'name'         => esc_html__( 'WPLoyalty - Launcher', 'wll-loyalty-launcher' ),
 			'description'  => __( 'Launcher widget for WPLoyalty. Let your customers easily discover your loyalty rewards.', 'wll-loyalty-launcher' ),
-			'icon_url'     => \Wlr\App\Helpers\Util::getImageUrl( 'wp-loyalty-launcher' ),
+			'icon_url'     => \Wlr\App\Helpers\Util::getImageUrl( 'wll-loyalty-launcher' ),
 			'page_url'     => '{addon_page}',
 			'document_url' => '',
 			'is_external'  => true,
