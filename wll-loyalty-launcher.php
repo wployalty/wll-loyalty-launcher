@@ -29,6 +29,38 @@ add_action( 'before_woocommerce_init', function () {
 		FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__ );
 	}
 } );
+if ( ! function_exists( 'getWLRPluginVersion' ) ) {
+	function getWLRPluginVersion() {
+		if ( defined( 'WLR_PLUGIN_VERSION' ) ) {
+			return WLR_PLUGIN_VERSION;
+		}
+		$version = getWLLLoyaltyVersion();
+		if ( $version == '1.0.0' ) {
+			$version = getWLLLoyaltyVersion( false );
+		}
+
+		return $version;
+	}
+}
+if ( ! function_exists( 'getWLLLoyaltyVersion' ) ) {
+	function getWLLLoyaltyVersion( bool $force = true ) {
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		}
+		$folder = 'wp-loyalty-rules';
+		$file   = 'wp-loyalty-rules.php';
+		if ( $force ) {
+			$folder = 'wployalty';
+		}
+		$plugin_file = $folder . '/' . $file;
+		if ( ! file_exists( WP_PLUGIN_DIR . '/' . $plugin_file ) ) {
+			return '1.0.0';
+		}
+		$plugin_folder = get_plugins( '/' . $folder );
+
+		return $plugin_folder[ $file ]['Version'] ?? '1.0.0';
+	}
+}
 if ( ! function_exists( 'isWLLLoyaltyActive' ) ) {
 	function isWLLLoyaltyActive() {
 		$active_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins', [] ) );
@@ -41,7 +73,7 @@ if ( ! function_exists( 'isWLLLoyaltyActive' ) ) {
 	}
 }
 
-if ( ! isWLLLoyaltyActive() ) {
+if ( ! isWLLLoyaltyActive() || ! ( (int) version_compare( getWLRPluginVersion(), '1.3.0', '>=' ) > 0 ) ) {
 	return;
 }
 
