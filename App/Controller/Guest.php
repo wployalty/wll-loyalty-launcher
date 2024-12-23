@@ -15,7 +15,7 @@ class Guest {
 	 * @return void
 	 */
 	public static function getEarnCampaigns() {
-		if ( ! WC::isSecurityValid( 'render_page_nonce' ) ) {
+		if ( ! WC::isSiteSecurityValid( 'render_page_nonce' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
 		}
 		if ( ! Util::isAdminSide() ) {
@@ -35,7 +35,7 @@ class Guest {
 	 * @return void
 	 */
 	public static function getRedeemRewards() {
-		if ( ! WC::isSecurityValid( 'render_page_nonce' ) ) {
+		if ( ! WC::isSiteSecurityValid( 'render_page_nonce' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
 		}
 		if ( ! Util::isAdminSide() ) {

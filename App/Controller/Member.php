@@ -20,7 +20,7 @@ class Member {
 	 * @return mixed The earn campaigns as an array or json response.
 	 */
 	public static function getEarnCampaigns() {
-		if ( ! WC::isSecurityValid( 'render_page_nonce' ) ) {
+		if ( ! WC::isSiteSecurityValid( 'render_page_nonce' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
 		}
 		if ( ! Util::isAdminSide() ) {
@@ -39,7 +39,7 @@ class Member {
 	 * @return mixed The redeem data as an array or json response.
 	 */
 	public static function getAvailableRedeemReward() {
-		if ( ! WC::isSecurityValid( 'render_page_nonce' ) ) {
+		if ( ! WC::isSiteSecurityValid( 'render_page_nonce' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
 		}
 		if ( ! Util::isAdminSide() ) {
@@ -98,7 +98,7 @@ class Member {
 	 * @return mixed The earned coupons as an array or json response.
 	 */
 	public static function getEarnedCoupons() {
-		if ( ! WC::isSecurityValid( 'render_page_nonce' ) ) {
+		if ( ! WC::isSiteSecurityValid( 'render_page_nonce' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
 		}
 		if ( ! Util::isAdminSide() ) {
@@ -140,7 +140,7 @@ class Member {
 	 * @return mixed The reward opportunities as an array or json response.
 	 */
 	public static function getRewardOpportunities() {
-		if ( ! WC::isSecurityValid( 'render_page_nonce' ) ) {
+		if ( ! WC::isSiteSecurityValid( 'render_page_nonce' ) ) {
 			wp_send_json_error( [ 'message' => __( 'Basic check failed', 'wll-loyalty-launcher' ) ] );
 		}
 		if ( ! Util::isAdminSide() ) {

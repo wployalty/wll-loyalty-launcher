@@ -65,6 +65,22 @@ class WC {
 	}
 
 	/**
+	 * Check if the site security is valid.
+	 *
+	 * @param string $nonce_name The name of the nonce to be validated.
+	 *
+	 * @return bool True if site security is valid, false otherwise.
+	 */
+	public static function isSiteSecurityValid( string $nonce_name = '' ): bool {
+		$wdr_nonce = Input::get( 'wll_nonce' );
+		if ( ! self::verifyNonce( $wdr_nonce, $nonce_name ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Create nonce for woocommerce.
 	 *
 	 * @param string $action
