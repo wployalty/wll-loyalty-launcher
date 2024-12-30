@@ -7,7 +7,7 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         path: __dirname,
-        filename: "../Assets/Site/Js/dist/bundle.js",
+        filename: "../assets/site/js/dist/bundle.js",
     },
     module: {
         rules: [
