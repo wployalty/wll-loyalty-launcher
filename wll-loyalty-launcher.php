@@ -51,6 +51,7 @@ if ( ! function_exists( 'getWLLLoyaltyVersion' ) ) {
 		$file   = 'wp-loyalty-rules.php';
 		if ( $force ) {
 			$folder = 'wployalty';
+			$file   = 'wp-loyalty-rules-lite.php';
 		}
 		$plugin_file = $folder . '/' . $file;
 		if ( ! file_exists( WP_PLUGIN_DIR . '/' . $plugin_file ) ) {
