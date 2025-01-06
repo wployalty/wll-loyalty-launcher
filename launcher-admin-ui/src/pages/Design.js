@@ -105,7 +105,8 @@ const Design = () => {
             <SidebarTabContainer label={labels.design.colors.title} tabIcon={"color"}
                                  click={() => setActiveSidebar("colors")}/>
             <SidebarTabContainer label={labels.design.branding} tabIcon={"brand"}
-                                 click={() => setActiveSidebar("visibility")}
+                                 click={appState.is_pro ? () => setActiveSidebar("visibility") : () => {}}
+                                 isPro={appState.is_pro}
             />
         </div>
     };
