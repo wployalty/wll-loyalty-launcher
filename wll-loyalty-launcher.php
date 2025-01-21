@@ -34,9 +34,9 @@ if ( ! function_exists( 'getWLRPluginVersion' ) ) {
 		if ( defined( 'WLR_PLUGIN_VERSION' ) ) {
 			return WLR_PLUGIN_VERSION;
 		}
-		$version = getWLLLoyaltyVersion();
+		$version = getWLLLoyaltyVersion(false);
 		if ( $version == '1.0.0' ) {
-			$version = getWLLLoyaltyVersion( false );
+			$version = getWLLLoyaltyVersion();
 		}
 
 		return $version;

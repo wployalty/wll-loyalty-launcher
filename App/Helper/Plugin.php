@@ -132,9 +132,9 @@ class Plugin {
 		if ( defined( 'WLR_PLUGIN_VERSION' ) ) {
 			return WLR_PLUGIN_VERSION;
 		}
-		$version = self::getWLRVersion();
+		$version = self::getWLRVersion(false);
 		if ( $version == '1.0.0' ) {
-			$version = self::getWLRVersion( false );
+			$version = self::getWLRVersion();
 		}
 
 		return $version;
