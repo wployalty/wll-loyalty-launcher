@@ -57,6 +57,13 @@ if ( ! function_exists( 'getWLLLoyaltyVersion' ) ) {
 		if ( ! file_exists( WP_PLUGIN_DIR . '/' . $plugin_file ) ) {
 			return '1.0.0';
 		}
+		$active_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins', [] ) );
+		if ( is_multisite() ) {
+			$active_plugins = array_merge( $active_plugins, get_site_option( 'active_sitewide_plugins', [] ) );
+		}
+		if(!(in_array( $plugin_file, $active_plugins ) || array_key_exists( $plugin_file, $active_plugins ))){
+			return '1.0.0';
+		}
 		$plugin_folder = get_plugins( '/' . $folder );
 
 		return $plugin_folder[ $file ]['Version'] ?? '1.0.0';
