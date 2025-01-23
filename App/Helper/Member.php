@@ -120,7 +120,7 @@ class Member {
 			return [ 'user_has_level' => false ];
 		}
 		$is_user_available = ( isset( $user->id ) && is_object( $user ) && $user->id > 0 );
-		$level_check       = $is_user_available && is_object( $user->level_data ) && isset( $user->level_data->current_level_name ) && ! empty( $user->level_data->current_level_name );
+		$level_check       = $is_user_available && isset( $user->level_data ) && is_object( $user->level_data ) && isset( $user->level_data->current_level_name ) && ! empty( $user->level_data->current_level_name );
 		$has_level         = ( isset( $user->level_id ) && $user->level_id > 0 );
 		$level_data        = [
 			'user_has_level' => $has_level,
