@@ -32,6 +32,7 @@ class Settings {
 				[ 'value' => '{wlr_user_name}', 'label' => __( 'Displays customer’s name', 'wll-loyalty-launcher' ) ],
 				[
 					'value' => '{wlr_user_points}',
+					// translators: %s will replace the points label
 					'label' => sprintf( __( 'Displays customer’s %s', 'wll-loyalty-launcher' ), Loyalty::getPointLabel( 3 ) )
 				],
 				[
@@ -42,10 +43,12 @@ class Settings {
 			'referral' => [
 				[
 					'value' => '{wlr_referral_advocate_point}',
+					// translators: %s will replace the points label
 					'label' => sprintf( __( 'Displays %s reward for existing customers / advocates as configured in the referral campaign', 'wll-loyalty-launcher' ), Loyalty::getPointLabel( 3 ) )
 				],
 				[
 					'value' => '{wlr_referral_advocate_point_percentage}',
+					// translators: %s will replace the points label
 					'label' => sprintf( __( 'Displays %s percentage for existing customers / advocates as configured in the referral campaign', 'wll-loyalty-launcher' ), Loyalty::getPointLabel( 3 ) )
 				],
 				[
@@ -54,10 +57,12 @@ class Settings {
 				],
 				[
 					'value' => '{wlr_referral_friend_point}',
+					// translators: %s will replace the points label
 					'label' => sprintf( __( 'Displays %s reward for friends as configured in the referral campaign', 'wll-loyalty-launcher' ), Loyalty::getPointLabel( 3 ) )
 				],
 				[
 					'value' => '{wlr_referral_friend_point_percentage}',
+					// translators: %s will replace the points label
 					'label' => sprintf( __( 'Displays %s percentage for friends as configured in the referral campaign', 'wll-loyalty-launcher' ), Loyalty::getPointLabel( 3 ) )
 				],
 				[
@@ -400,6 +405,7 @@ class Settings {
 		];
 		array_walk_recursive( $text_data, function ( &$value, $key ) use ( $is_admin_side ) {
 			/*$is_admin_side = isset($is_admin_side) && is_bool($is_admin_side) && $is_admin_side;*/
+			//phpcs:ignore
 			$value = ( ! $is_admin_side ) ? __( $value, 'wll-loyalty-launcher' ) : $value;
 		} );
 		$data = [

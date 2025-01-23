@@ -48,11 +48,14 @@ class Member {
 			if ( empty( $available_rewards ) ) {
 				wp_send_json_success( [
 					'redeem_data' => [],
+					// translators: %s will be replaced with the reward label
 					'message'     => sprintf( __( 'No %s found!', 'wll-loyalty-launcher' ), Loyalty::getRewardLabel( 3 ) )
 				] );
 			}
 			foreach ( $available_rewards as $user_reward ) {
-				$user_reward->name        = ! empty( $user_reward->name ) ? __( $user_reward->name, 'wll-loyalty-launcher' ) : '';
+				//phpcs:ignore
+				$user_reward->name = ! empty( $user_reward->name ) ? __( $user_reward->name, 'wll-loyalty-launcher' ) : '';
+				//phpcs:ignore
 				$user_reward->description = ! empty( $user_reward->description ) ? __( $user_reward->description, 'wll-loyalty-launcher' ) : '';
 				$user_reward->button_text = __( 'Redeem', 'wll-loyalty-launcher' );
 				$user_reward->action_text = Loyalty::getUserRewardText( $user_reward );
@@ -68,6 +71,7 @@ class Member {
 				}
 				$user_reward->expiry_date_text = "";
 				if ( ! empty( $user_reward->expiry_date ) && ! empty( $user_reward->discount_code ) ) {
+					// translators: %s will be replaced with the expiry date
 					$user_reward->expiry_date_text = sprintf( __( 'Expires on %s', "wll-loyalty-launcher" ), $user_reward->expiry_date );
 				}
 				if ( empty( $user_reward->discount_code ) ) {

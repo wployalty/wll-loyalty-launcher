@@ -15,7 +15,7 @@ class Setup {
 	public static function init() {
 		register_activation_hook( WLL_PLUGIN_FILE, [ __CLASS__, 'activate' ] );
 		register_deactivation_hook( WLL_PLUGIN_FILE, [ __CLASS__, 'deactivate' ] );
-		register_uninstall_hook( WLL_PLUGIN_FILE, [ __CLASS__, 'uninstall' ] );
+		//register_uninstall_hook( WLL_PLUGIN_FILE, [ __CLASS__, 'uninstall' ] );
 		add_filter( 'plugin_row_meta', [ __CLASS__, 'getPluginRowMeta' ], 10, 2 );
 	}
 

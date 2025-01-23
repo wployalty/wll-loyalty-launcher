@@ -9,9 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-01-21T09:28:45+00:00\n"
+"POT-Creation-Date: 2025-01-23T17:34:32+05:30\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.10.0\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wll-loyalty-launcher\n"
 
 #. Plugin Name of the plugin
@@ -51,8 +51,8 @@ msgstr ""
 #: App/Controller/Guest.php:39
 #: App/Controller/Member.php:24
 #: App/Controller/Member.php:43
-#: App/Controller/Member.php:102
-#: App/Controller/Member.php:144
+#: App/Controller/Member.php:106
+#: App/Controller/Member.php:148
 msgid "Basic check failed"
 msgstr ""
 
@@ -278,7 +278,7 @@ msgid "Earn"
 msgstr ""
 
 #: App/Controller/Admin/Labels.php:152
-#: App/Controller/Member.php:57
+#: App/Controller/Member.php:60
 msgid "Redeem"
 msgstr ""
 
@@ -307,12 +307,12 @@ msgid "This preview uses dummy records."
 msgstr ""
 
 #: App/Controller/Admin/Labels.php:159
-#: App/Controller/Common.php:298
+#: App/Controller/Common.php:302
 msgid "Powered by"
 msgstr ""
 
 #: App/Controller/Admin/Labels.php:160
-#: App/Controller/Common.php:300
+#: App/Controller/Common.php:304
 msgid "WPLoyalty"
 msgstr ""
 
@@ -325,8 +325,9 @@ msgstr ""
 msgid "My Coupons"
 msgstr ""
 
+#. translators: %s will replace the reward label configured in the settings
 #: App/Controller/Admin/Labels.php:163
-#: App/Controller/Common.php:308
+#: App/Controller/Common.php:314
 msgid "Apply"
 msgstr ""
 
@@ -555,275 +556,292 @@ msgstr ""
 msgid "Settings saved!"
 msgstr ""
 
-#: App/Controller/Common.php:293
+#: App/Controller/Common.php:297
 msgid "Day"
 msgstr ""
 
-#: App/Controller/Common.php:294
+#: App/Controller/Common.php:298
 msgid "Month"
 msgstr ""
 
-#: App/Controller/Common.php:295
+#: App/Controller/Common.php:299
 msgid "Year"
 msgstr ""
 
-#: App/Controller/Common.php:303
+#: App/Controller/Common.php:307
 msgid "Coupons"
 msgstr ""
 
-#: App/Controller/Common.php:304
+#: App/Controller/Common.php:308
 msgid "Loading..."
 msgstr ""
 
-#: App/Controller/Common.php:305
+#: App/Controller/Common.php:309
 msgid "If loading takes a while, please refresh the screen...!"
 msgstr ""
 
-#: App/Controller/Common.php:306
+#. translators: %s will replace the reward label configured in the settings
+#: App/Controller/Common.php:311
 msgid "%s Opportunities"
 msgstr ""
 
-#: App/Controller/Common.php:307
+#. translators: %s will replace the reward label configured in the settings
+#: App/Controller/Common.php:313
 msgid "My %s"
 msgstr ""
 
-#: App/Controller/Common.php:309
+#: App/Controller/Common.php:315
 msgid "Read more"
 msgstr ""
 
-#: App/Controller/Common.php:310
+#: App/Controller/Common.php:316
 msgid "Read less"
 msgstr ""
 
-#: App/Controller/Guest.php:52
-#: App/Controller/Member.php:51
-#: App/Helper/Loyalty.php:550
-#: App/Helper/Loyalty.php:559
+#. translators: %s will be replaced with the reward label
+#: App/Controller/Guest.php:55
+#: App/Controller/Member.php:52
+#: App/Helper/Loyalty.php:563
+#: App/Helper/Loyalty.php:575
 msgid "No %s found!"
 msgstr ""
 
-#: App/Controller/Member.php:71
+#. translators: %s will be replaced with the expiry date
+#: App/Controller/Member.php:75
 msgid "Expires on %s"
 msgstr ""
 
-#: App/Controller/Member.php:116
+#: App/Controller/Member.php:120
 msgid "No coupons found!"
 msgstr ""
 
 #: App/Helper/Loyalty.php:95
-#: App/Helper/Loyalty.php:119
+#: App/Helper/Loyalty.php:122
 msgid "Create a first campaign."
 msgstr ""
 
-#: App/Helper/Loyalty.php:161
+#: App/Helper/Loyalty.php:164
 msgid "Follow"
 msgstr ""
 
-#: App/Helper/Loyalty.php:163
-#: App/Helper/Loyalty.php:175
-#: App/Helper/Loyalty.php:200
-#: App/Helper/Loyalty.php:209
+#: App/Helper/Loyalty.php:166
+#: App/Helper/Loyalty.php:178
+#: App/Helper/Loyalty.php:203
+#: App/Helper/Loyalty.php:212
 msgid "Earned"
 msgstr ""
 
-#: App/Helper/Loyalty.php:171
+#: App/Helper/Loyalty.php:174
 msgid "Edit"
 msgstr ""
 
-#: App/Helper/Loyalty.php:171
+#: App/Helper/Loyalty.php:174
 msgid "Set"
 msgstr ""
 
-#: App/Helper/Loyalty.php:172
+#: App/Helper/Loyalty.php:175
 msgid "Update"
 msgstr ""
 
-#: App/Helper/Loyalty.php:196
+#: App/Helper/Loyalty.php:199
 msgid "Share"
 msgstr ""
 
-#: App/Helper/Loyalty.php:206
+#: App/Helper/Loyalty.php:209
 msgid "Sign Up"
 msgstr ""
 
-#: App/Helper/Loyalty.php:308
+#: App/Helper/Loyalty.php:311
 msgid "Point for purchase"
 msgstr ""
 
-#: App/Helper/Loyalty.php:309
+#: App/Helper/Loyalty.php:312
 msgid "+10 Points for every $1 spent"
 msgstr ""
 
-#: App/Helper/Loyalty.php:314
+#: App/Helper/Loyalty.php:317
 msgid "Celebrate a birthday"
 msgstr ""
 
-#: App/Helper/Loyalty.php:315
+#: App/Helper/Loyalty.php:318
 msgid "+30 points"
 msgstr ""
 
-#: App/Helper/Loyalty.php:320
+#: App/Helper/Loyalty.php:323
 msgid "Twitter Share"
 msgstr ""
 
-#: App/Helper/Loyalty.php:321
+#: App/Helper/Loyalty.php:324
 msgid "+70 points"
 msgstr ""
 
-#: App/Helper/Loyalty.php:326
+#: App/Helper/Loyalty.php:329
 msgid "Follow on Facebook"
 msgstr ""
 
-#: App/Helper/Loyalty.php:327
+#: App/Helper/Loyalty.php:330
 msgid "+50 points"
 msgstr ""
 
-#: App/Helper/Loyalty.php:332
+#: App/Helper/Loyalty.php:335
 msgid "Review a Product"
 msgstr ""
 
-#: App/Helper/Loyalty.php:333
+#: App/Helper/Loyalty.php:336
 msgid "+800 points"
 msgstr ""
 
-#: App/Helper/Loyalty.php:355
-#: App/Helper/Loyalty.php:358
+#. translators: First %s will replace discount value followed by %, Second %d will replace required point, Third %s will replace point label, Fourth %s will replace discount value followed by %
+#: App/Helper/Loyalty.php:359
+msgid "%1$s Off"
+msgstr ""
+
+#. translators: First %s will replace discount value followed by %, Second %d will replace required point, Third %s will replace point label, Fourth %s will replace discount value followed by %
+#: App/Helper/Loyalty.php:359
+msgid "%2$d %3$s = %4$s Off"
+msgstr ""
+
+#. translators: %s will replace discount value
+#: App/Helper/Loyalty.php:363
 msgid "%s Off"
 msgstr ""
 
-#: App/Helper/Loyalty.php:355
-#: App/Helper/Loyalty.php:359
-msgid "%d %s = %s Off"
-msgstr ""
-
-#: App/Helper/Loyalty.php:364
-msgid "%d%s Off"
-msgstr ""
-
+#. translators: First %d will replace required point, Second %s will replace point label, Third %s will replace discount value
 #: App/Helper/Loyalty.php:365
-msgid "%d %s = %d%s Off"
+msgid "%1$d %2$s = %3$s Off"
 msgstr ""
 
-#: App/Helper/Loyalty.php:368
-#: App/Helper/Loyalty.php:427
-#: App/Helper/Loyalty.php:619
-#: App/Helper/Loyalty.php:620
+#. translators: First %d will replace discount value, Second %s will replace % symbol
+#: App/Helper/Loyalty.php:371
+msgid "%1$d%2$s Off"
+msgstr ""
+
+#. translators: First %d will replace required point, Second %s will replace point label, Third %d will replace discount value, Fourth %s will replace % symbol
+#: App/Helper/Loyalty.php:373
+msgid "%1$d %2$s = %3$d%4$s Off"
+msgstr ""
+
+#: App/Helper/Loyalty.php:377
+#: App/Helper/Loyalty.php:439
+#: App/Helper/Loyalty.php:637
+#: App/Helper/Loyalty.php:638
 msgid "Free product"
 msgstr ""
 
-#: App/Helper/Loyalty.php:371
-#: App/Helper/Loyalty.php:430
-#: App/Helper/Loyalty.php:468
-#: App/Helper/Loyalty.php:523
+#: App/Helper/Loyalty.php:381
+#: App/Helper/Loyalty.php:442
+#: App/Helper/Loyalty.php:480
+#: App/Helper/Loyalty.php:535
 msgid "Free shipping"
 msgstr ""
 
-#: App/Helper/Loyalty.php:454
+#: App/Helper/Loyalty.php:466
 msgid "Point conversion"
 msgstr ""
 
-#: App/Helper/Loyalty.php:455
+#: App/Helper/Loyalty.php:467
 msgid "Covert point into coupons"
 msgstr ""
 
-#: App/Helper/Loyalty.php:456
+#: App/Helper/Loyalty.php:468
 msgid "10 points = $15.00 Off"
 msgstr ""
 
-#: App/Helper/Loyalty.php:461
-#: App/Helper/Loyalty.php:510
-#: App/Helper/Loyalty.php:612
-#: App/Helper/Loyalty.php:613
+#: App/Helper/Loyalty.php:473
+#: App/Helper/Loyalty.php:522
+#: App/Helper/Loyalty.php:630
+#: App/Helper/Loyalty.php:631
 msgid "Percentage discount"
 msgstr ""
 
-#: App/Helper/Loyalty.php:462
+#: App/Helper/Loyalty.php:474
 msgid "Redeem points and get percentage discount"
 msgstr ""
 
-#: App/Helper/Loyalty.php:463
+#: App/Helper/Loyalty.php:475
 msgid "100 points = 10% Off"
 msgstr ""
 
-#: App/Helper/Loyalty.php:469
+#: App/Helper/Loyalty.php:481
 msgid "Redeem points and get free shipping"
 msgstr ""
 
-#: App/Helper/Loyalty.php:470
+#: App/Helper/Loyalty.php:482
 msgid "free shipping"
 msgstr ""
 
-#: App/Helper/Loyalty.php:475
-#: App/Helper/Loyalty.php:501
+#: App/Helper/Loyalty.php:487
+#: App/Helper/Loyalty.php:513
 msgid "Fixed discount"
 msgstr ""
 
-#: App/Helper/Loyalty.php:476
+#: App/Helper/Loyalty.php:488
 msgid "Redeem points and get fixed discount"
 msgstr ""
 
-#: App/Helper/Loyalty.php:477
+#: App/Helper/Loyalty.php:489
 msgid "100 points = $10.00 Off"
 msgstr ""
 
-#: App/Helper/Loyalty.php:502
+#: App/Helper/Loyalty.php:514
 msgid "Fixed discount description"
 msgstr ""
 
-#: App/Helper/Loyalty.php:503
+#: App/Helper/Loyalty.php:515
 msgid "Expires on 2024-04-12"
 msgstr ""
 
-#: App/Helper/Loyalty.php:505
+#: App/Helper/Loyalty.php:517
 msgid "$10.00"
 msgstr ""
 
-#: App/Helper/Loyalty.php:511
+#: App/Helper/Loyalty.php:523
 msgid "Percentage discount description"
 msgstr ""
 
-#: App/Helper/Loyalty.php:512
+#: App/Helper/Loyalty.php:524
 msgid "Expires on 2023-05-12"
 msgstr ""
 
-#: App/Helper/Loyalty.php:514
+#: App/Helper/Loyalty.php:526
 msgid "10%"
 msgstr ""
 
-#: App/Helper/Loyalty.php:519
+#: App/Helper/Loyalty.php:531
 msgid "Free Shipping"
 msgstr ""
 
-#: App/Helper/Loyalty.php:520
+#: App/Helper/Loyalty.php:532
 msgid "Free shipping description"
 msgstr ""
 
-#: App/Helper/Loyalty.php:581
+#: App/Helper/Loyalty.php:598
 msgid "reward"
 msgstr ""
 
-#: App/Helper/Loyalty.php:582
+#: App/Helper/Loyalty.php:600
 msgid "rewards"
 msgstr ""
 
-#: App/Helper/Loyalty.php:605
+#: App/Helper/Loyalty.php:623
 msgid "Fixed coupon discount"
 msgstr ""
 
-#: App/Helper/Loyalty.php:606
+#: App/Helper/Loyalty.php:624
 msgid "Coupon reward"
 msgstr ""
 
-#: App/Helper/Loyalty.php:626
-#: App/Helper/Loyalty.php:627
+#: App/Helper/Loyalty.php:644
+#: App/Helper/Loyalty.php:645
 msgid "Points conversion"
 msgstr ""
 
-#: App/Helper/Member.php:134
-msgid "%d %s more needed to unlock next level"
+#. translators: First %1$d will replace the needed point to reach next level, Second %2$s will replace the point label
+#: App/Helper/Member.php:137
+msgid "%1$d %2$s more needed to unlock next level"
 msgstr ""
 
-#: App/Helper/Member.php:138
+#: App/Helper/Member.php:141
 msgid "Congratulations! You have reached the final level"
 msgstr ""
 
@@ -868,35 +886,40 @@ msgstr ""
 msgid "Displays customer’s name"
 msgstr ""
 
-#: App/Helper/Settings.php:35
+#. translators: %s will replace the points label
+#: App/Helper/Settings.php:36
 msgid "Displays customer’s %s"
 msgstr ""
 
-#: App/Helper/Settings.php:39
+#: App/Helper/Settings.php:40
 msgid "Displays the “points label” as configured in the settings"
 msgstr ""
 
-#: App/Helper/Settings.php:45
+#. translators: %s will replace the points label
+#: App/Helper/Settings.php:47
 msgid "Displays %s reward for existing customers / advocates as configured in the referral campaign"
 msgstr ""
 
-#: App/Helper/Settings.php:49
+#. translators: %s will replace the points label
+#: App/Helper/Settings.php:52
 msgid "Displays %s percentage for existing customers / advocates as configured in the referral campaign"
 msgstr ""
 
-#: App/Helper/Settings.php:53
+#: App/Helper/Settings.php:56
 msgid "Displays any direct coupon rewards for existing customers / advocates as configured in the referral campaign"
 msgstr ""
 
-#: App/Helper/Settings.php:57
+#. translators: %s will replace the points label
+#: App/Helper/Settings.php:61
 msgid "Displays %s reward for friends as configured in the referral campaign"
 msgstr ""
 
-#: App/Helper/Settings.php:61
+#. translators: %s will replace the points label
+#: App/Helper/Settings.php:66
 msgid "Displays %s percentage for friends as configured in the referral campaign"
 msgstr ""
 
-#: App/Helper/Settings.php:65
+#: App/Helper/Settings.php:70
 msgid "Displays any direct coupon reward for friends as configured in the referral campaign"
 msgstr ""
 

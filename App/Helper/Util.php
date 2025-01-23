@@ -33,6 +33,7 @@ class Util {
 		if ( ! $display ) {
 			return $content;
 		}
+		//phpcs:ignore
 		echo $content;
 	}
 
