@@ -44,11 +44,14 @@ class Guest {
 			$rewards       = $customer_page->getRewardList();
 			if ( ! empty( $rewards ) && is_array( $rewards ) ) {
 				foreach ( $rewards as $reward ) {
-					$reward->name        = ! empty( $reward->name ) ? __( $reward->name, 'wll-loyalty-launcher' ) : '';
+					//phpcs:ignore
+					$reward->name = ! empty( $reward->name ) ? __( $reward->name, 'wll-loyalty-launcher' ) : '';
+					//phpcs:ignore
 					$reward->description = ! empty( $reward->description ) ? __( $reward->description, 'wll-loyalty-launcher' ) : '';
 					$reward->action_text = Loyalty::getUserRewardText( $reward );
 				}
 			}
+			// translators: %s will be replaced with the reward label
 			$message     = empty( $rewards ) ? sprintf( __( 'No %s found!', 'wll-loyalty-launcher' ), Loyalty::getRewardLabel( 3 ) ) : '';
 			$reward_list = apply_filters( 'wll_before_launcher_rewards_data', $rewards, $user_email );
 			wp_send_json_success( [ 'redeem_data' => $reward_list, 'message' => $message ] );

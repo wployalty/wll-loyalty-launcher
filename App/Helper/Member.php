@@ -59,6 +59,7 @@ class Member {
 			],
 		];
 		array_walk_recursive( $short_code_data, function ( &$value, $key ) use ( $is_admin_side ) {
+			//phpcs:ignore
 			$value = ( ! $is_admin_side ) ? __( $value, 'wll-loyalty-launcher' ) : $value;
 			$value = ( ! $is_admin_side ) ? Settings::processShortCodes( $value ) : $value;
 		} );
@@ -127,11 +128,13 @@ class Member {
 		];
 		if ( $is_user_available && $has_level && $level_check ) {
 			$level_data['current_level_image'] = isset( $user->level_data->current_level_image ) && ! empty( $user->level_data->current_level_image ) ? $user->level_data->current_level_image : '';
-			$level_data['current_level_name']  = ! empty( $user->level_data ) && ! empty( $user->level_data->current_level_name ) ? __( $user->level_data->current_level_name, 'wll-loyalty-launcher' ) : '';
+			//phpcs:ignore
+			$level_data['current_level_name'] = ! empty( $user->level_data ) && ! empty( $user->level_data->current_level_name ) ? __( $user->level_data->current_level_name, 'wll-loyalty-launcher' ) : '';
 			if ( isset( $user->level_data->current_level_start ) && isset( $user->level_data->next_level_start ) && $user->level_data->next_level_start > 0 ) {
-				$level_data['level_range']            = round( ( ( $user->earn_total_point - $user->level_data->current_level_start ) / ( $user->level_data->next_level_start - $user->level_data->current_level_start ) ) * 100 );
-				$needed_point                         = $user->level_data->next_level_start - $user->earn_total_point;
-				$level_data['progress_content']       = sprintf( __( '%d %s more needed to unlock next level', 'wll-loyalty-launcher' ), (int) $needed_point, Loyalty::getPointLabel( $needed_point ) );
+				$level_data['level_range'] = round( ( ( $user->earn_total_point - $user->level_data->current_level_start ) / ( $user->level_data->next_level_start - $user->level_data->current_level_start ) ) * 100 );
+				$needed_point              = $user->level_data->next_level_start - $user->earn_total_point;
+				// translators: First %1$d will replace the needed point to reach next level, Second %2$s will replace the point label
+				$level_data['progress_content']       = sprintf( __( '%1$d %2$s more needed to unlock next level', 'wll-loyalty-launcher' ), (int) $needed_point, Loyalty::getPointLabel( $needed_point ) );
 				$level_data['is_reached_final_level'] = false;
 			} else {
 				$level_data['is_reached_final_level'] = true;

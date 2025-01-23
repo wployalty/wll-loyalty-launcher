@@ -254,11 +254,15 @@ class Common {
 		if ( Loyalty::isBannedUser() || ! apply_filters( 'wll_before_launcher_display', true ) ) {
 			return;
 		}
-		$args = apply_filters( 'wll_before_launcher_site_page', [
+		$args         = apply_filters( 'wll_before_launcher_site_page', [
 			//'style' => Util::renderTemplate( WLL_PLUGIN_DIR . '/assets/site/css/launcher.css' ),
 		] );
-		$path = WLL_PLUGIN_DIR . '/App/View/Site/main_site.php';
-		echo apply_filters( 'wll_launcher_widget', Util::renderTemplate( $path, $args, false ), $args );
+		$path         = WLL_PLUGIN_DIR . '/App/View/Site/main_site.php';
+		$content      = apply_filters( 'wll_launcher_widget', Util::renderTemplate( $path, $args, false ), $args );
+		$allowed_html = [
+			'div' => [ 'class' => [], 'id' => [] ]
+		];
+		echo wp_kses( $content, $allowed_html );
 	}
 
 	/**
@@ -303,7 +307,9 @@ class Common {
 			'coupon_text'             => __( 'Coupons', 'wll-loyalty-launcher' ),
 			'loading_text'            => __( 'Loading...', 'wll-loyalty-launcher' ),
 			'loading_timer_text'      => __( 'If loading takes a while, please refresh the screen...!', 'wll-loyalty-launcher' ),
+			// translators: %s will replace the reward label configured in the settings
 			'reward_opportunity_text' => sprintf( __( '%s Opportunities', 'wll-loyalty-launcher' ), ucfirst( Loyalty::getRewardLabel() ) ),
+			// translators: %s will replace the reward label configured in the settings
 			'my_rewards_text'         => sprintf( __( 'My %s', 'wll-loyalty-launcher' ), ucfirst( Loyalty::getRewardLabel( 3 ) ) ),
 			'apply_button_text'       => __( 'Apply', 'wll-loyalty-launcher' ),
 			'read_more_text'          => __( 'Read more', 'wll-loyalty-launcher' ),

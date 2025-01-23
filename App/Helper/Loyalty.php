@@ -100,8 +100,11 @@ class Loyalty {
 		$is_show_campaign_list = [];
 		$user                  = self::getUserDetails();
 		foreach ( $campaign_list as &$active_campaigns ) {
-			$active_campaigns->name                    = ! empty( $active_campaigns->name ) ? __( $active_campaigns->name, 'wll-loyalty-launcher' ) : '';
-			$active_campaigns->description             = ! empty( $active_campaigns->description ) ? __( $active_campaigns->description, 'wll-loyalty-launcher' ) : '';
+			//phpcs:ignore
+			$active_campaigns->name = ! empty( $active_campaigns->name ) ? __( $active_campaigns->name, 'wll-loyalty-launcher' ) : '';
+			//phpcs:ignore
+			$active_campaigns->description = ! empty( $active_campaigns->description ) ? __( $active_campaigns->description, 'wll-loyalty-launcher' ) : '';
+			//phpcs:ignore
 			$active_campaigns->campaign_title_discount = ! empty( $active_campaigns->campaign_title_discount ) ? __( $active_campaigns->campaign_title_discount, 'wll-loyalty-launcher' ) : '';
 			if ( ! empty( $active_campaigns->action_type ) ) {
 				self::getCampaignActions( $active_campaigns, $user );
@@ -352,22 +355,29 @@ class Loyalty {
 			case 'fixed_cart':
 			case 'points_conversion':
 				if ( $user_reward->coupon_type == 'percent' ) {
-					$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%s Off', 'wll-loyalty-launcher' ), $user_reward->discount_value . '%' ) : sprintf( __( '%d %s = %s Off', 'wll-loyalty-launcher' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $user_reward->discount_value . '%' );
+					// translators: First %s will replace discount value followed by %, Second %d will replace required point, Third %s will replace point label, Fourth %s will replace discount value followed by %
+					$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%1$s Off', 'wll-loyalty-launcher' ), $user_reward->discount_value . '%' ) : sprintf( __( '%2$d %3$s = %4$s Off', 'wll-loyalty-launcher' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $user_reward->discount_value . '%' );
 				} else {
 					$discount_value = WC::getCustomPrice( $user_reward->discount_value );
-					$text           = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%s Off', 'wll-loyalty-launcher' ), $discount_value )
-						: sprintf( __( '%d %s = %s Off', 'wll-loyalty-launcher' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $discount_value );
+					// translators: %s will replace discount value
+					$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%s Off', 'wll-loyalty-launcher' ), $discount_value )
+						// translators: First %d will replace required point, Second %s will replace point label, Third %s will replace discount value
+						: sprintf( __( '%1$d %2$s = %3$s Off', 'wll-loyalty-launcher' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $discount_value );
 				}
 
 				break;
 			case 'percent':
-				$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%d%s Off', 'wll-loyalty-launcher' ), $user_reward->discount_value, '%' )
-					: sprintf( __( '%d %s = %d%s Off', 'wll-loyalty-launcher' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $user_reward->discount_value, '%' );
+				// translators: First %d will replace discount value, Second %s will replace % symbol
+				$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%1$d%2$s Off', 'wll-loyalty-launcher' ), $user_reward->discount_value, '%' )
+					// translators: First %d will replace required point, Second %s will replace point label, Third %d will replace discount value, Fourth %s will replace % symbol
+					: sprintf( __( '%1$d %2$s = %3$d%4$s Off', 'wll-loyalty-launcher' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $user_reward->discount_value, '%' );
 				break;
 			case 'free_product':
+				//phpcs:ignore
 				$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? __( 'Free product', 'wll-loyalty-launcher' ) : __( $user_reward->require_point . ' ' . self::getPointLabel( $user_reward->require_point ), 'wll-loyalty-launcher' );
 				break;
 			case 'free_shipping':
+				//phpcs:ignore
 				$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? __( 'Free shipping', 'wll-loyalty-launcher' ) : __( $user_reward->require_point . ' ' . self::getPointLabel( $user_reward->require_point ), 'wll-loyalty-launcher' );
 				break;
 		}
@@ -387,10 +397,12 @@ class Loyalty {
 		$settings = get_option( 'wlr_settings', [] );
 		$singular = ! empty( $settings['wlr_point_singular_label'] ) ? $settings['wlr_point_singular_label'] : 'point';
 		if ( $label_translate ) {
+			//phpcs:ignore
 			$singular = __( $singular, 'wll-loyalty-launcher' );
 		}
 		$plural = ! empty( $settings['wlr_point_label'] ) ? $settings['wlr_point_label'] : 'points';
 		if ( $label_translate ) {
+			//phpcs:ignore
 			$plural = __( $plural, 'wll-loyalty-launcher' );
 		}
 		$point_label = ( $point == 0 || $point > 1 ) ? $plural : $singular;
@@ -547,15 +559,19 @@ class Loyalty {
 		if ( empty( $rewards ) || ! is_array( $rewards ) ) {
 			return [
 				'reward_opportunity' => [],
+				// translators: %s will be replaced with the reward label
 				'message'            => sprintf( __( 'No %s found!', 'wll-loyalty-launcher' ), self::getRewardLabel( 3 ) )
 			];
 		}
 		foreach ( $rewards as $reward ) {
-			$reward->name        = ! empty( $reward->name ) ? __( $reward->name, 'wll-loyalty-launcher' ) : '';
+			//phpcs:ignore
+			$reward->name = ! empty( $reward->name ) ? __( $reward->name, 'wll-loyalty-launcher' ) : '';
+			//phpcs:ignore
 			$reward->description = ! empty( $reward->description ) ? __( $reward->description, 'wll-loyalty-launcher' ) : '';
 		}
 		$message = "";
 		if ( count( $rewards ) == 0 ) {
+			// translators: %s will be replaced with the reward label
 			$message = sprintf( __( 'No %s found!', 'wll-loyalty-launcher' ), self::getRewardLabel( 3 ) );
 		}
 
@@ -578,9 +594,11 @@ class Loyalty {
 	 */
 	public static function getRewardLabel( $reward_count = 0 ) {
 		$setting_option = get_option( 'wlr_settings', [] );
-		$singular       = ( ! empty( $setting_option['reward_singular_label'] ) ) ? __( $setting_option['reward_singular_label'], 'wll-loyalty-launcher' ) : __( 'reward', 'wll-loyalty-launcher' );
-		$plural         = ( ! empty( $setting_option['reward_plural_label'] ) ) ? __( $setting_option['reward_plural_label'], 'wll-loyalty-launcher' ) : __( 'rewards', 'wll-loyalty-launcher' );
-		$reward_label   = ( $reward_count == 0 || $reward_count > 1 ) ? $plural : $singular;
+		//phpcs:ignore
+		$singular = ( ! empty( $setting_option['reward_singular_label'] ) ) ? __( $setting_option['reward_singular_label'], 'wll-loyalty-launcher' ) : __( 'reward', 'wll-loyalty-launcher' );
+		//phpcs:ignore
+		$plural       = ( ! empty( $setting_option['reward_plural_label'] ) ) ? __( $setting_option['reward_plural_label'], 'wll-loyalty-launcher' ) : __( 'rewards', 'wll-loyalty-launcher' );
+		$reward_label = ( $reward_count == 0 || $reward_count > 1 ) ? $plural : $singular;
 
 		return apply_filters( 'wlr_get_reward_label', $reward_label, $reward_count );
 	}
