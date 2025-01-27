@@ -123,8 +123,8 @@ class Common {
 	public static function addInternalAddons( $add_ons ) {
 		if ( ! empty( $add_ons['wp-loyalty-launcher'] ) ) {
 			unset( $add_ons['wp-loyalty-launcher'] );
-			update_option( 'wll_is_launcher_plugin_activated', true );
 		}
+		update_option( 'wll_is_launcher_plugin_activated', true );
 		$add_ons['wll-loyalty-launcher'] = [
 			'name'         => esc_html__( 'WPLoyalty - Launcher', 'wll-loyalty-launcher' ),
 			'description'  => __( 'Launcher widget for WPLoyalty. Let your customers easily discover your loyalty rewards.', 'wll-loyalty-launcher' ),
