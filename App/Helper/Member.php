@@ -131,8 +131,9 @@ class Member {
 			//phpcs:ignore
 			$level_data['current_level_name'] = ! empty( $user->level_data ) && ! empty( $user->level_data->current_level_name ) ? __( $user->level_data->current_level_name, 'wll-loyalty-launcher' ) : '';
 			if ( isset( $user->level_data->current_level_start ) && isset( $user->level_data->next_level_start ) && $user->level_data->next_level_start > 0 ) {
-				$level_data['level_range'] = round( ( ( $user->earn_total_point - $user->level_data->current_level_start ) / ( $user->level_data->next_level_start - $user->level_data->current_level_start ) ) * 100 );
-				$needed_point              = $user->level_data->next_level_start - $user->earn_total_point;
+                $points = apply_filters('wll_points_to_get_level', $user->earn_total_point, $user);
+				$level_data['level_range'] = round( ( ( $points - $user->level_data->current_level_start ) / ( $user->level_data->next_level_start - $user->level_data->current_level_start ) ) * 100 );
+				$needed_point              = $user->level_data->next_level_start - $points;
 				// translators: First %1$d will replace the needed point to reach next level, Second %2$s will replace the point label
 				$level_data['progress_content']       = sprintf( __( '%1$d %2$s more needed to unlock next level', 'wll-loyalty-launcher' ), (int) $needed_point, Loyalty::getPointLabel( $needed_point ) );
 				$level_data['is_reached_final_level'] = false;
