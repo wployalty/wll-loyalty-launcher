@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPLoyalty - Launcher 1.0.0\n"
+"Project-Id-Version: WPLoyalty - Launcher 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wll-loyalty-launcher\n"
 "Last-Translator: Wployalty <support@wployalty.net>\n"
 "Language-Team: Wployalty <support@wployalty.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-01-29T05:58:32+00:00\n"
+"POT-Creation-Date: 2025-05-05T11:03:57+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: wll-loyalty-launcher\n"
@@ -815,14 +815,6 @@ msgstr ""
 msgid "Free shipping description"
 msgstr ""
 
-#: App/Helper/Loyalty.php:598
-msgid "reward"
-msgstr ""
-
-#: App/Helper/Loyalty.php:600
-msgid "rewards"
-msgstr ""
-
 #: App/Helper/Loyalty.php:623
 msgid "Fixed coupon discount"
 msgstr ""
@@ -837,11 +829,11 @@ msgid "Points conversion"
 msgstr ""
 
 #. translators: First %1$d will replace the needed point to reach next level, Second %2$s will replace the point label
-#: App/Helper/Member.php:137
+#: App/Helper/Member.php:138
 msgid "%1$d %2$s more needed to unlock next level"
 msgstr ""
 
-#: App/Helper/Member.php:141
+#: App/Helper/Member.php:142
 msgid "Congratulations! You have reached the final level"
 msgstr ""
 

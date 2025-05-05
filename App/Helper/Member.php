@@ -129,7 +129,7 @@ class Member {
 		if ( $is_user_available && $has_level && $level_check ) {
 			$level_data['current_level_image'] = isset( $user->level_data->current_level_image ) && ! empty( $user->level_data->current_level_image ) ? $user->level_data->current_level_image : '';
 			//phpcs:ignore
-			$level_data['current_level_name'] = ! empty( $user->level_data ) && ! empty( $user->level_data->current_level_name ) ? __( $user->level_data->current_level_name, 'wll-loyalty-launcher' ) : '';
+			$level_data['current_level_name'] = ! empty( $user->level_data ) && ! empty( $user->level_data->current_level_name ) ? __( $user->level_data->current_level_name, 'wp-loyalty-rules' ) : '';
 			if ( isset( $user->level_data->current_level_start ) && isset( $user->level_data->next_level_start ) && $user->level_data->next_level_start > 0 ) {
                 $points = apply_filters('wll_points_to_get_level', $user->earn_total_point, $user);
 				$level_data['level_range'] = round( ( ( $points - $user->level_data->current_level_start ) / ( $user->level_data->next_level_start - $user->level_data->current_level_start ) ) * 100 );

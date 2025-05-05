@@ -54,9 +54,9 @@ class Member {
 			}
 			foreach ( $available_rewards as $user_reward ) {
 				//phpcs:ignore
-				$user_reward->name = ! empty( $user_reward->name ) ? __( $user_reward->name, 'wll-loyalty-launcher' ) : '';
+				$user_reward->name = ! empty( $user_reward->name ) ? __( $user_reward->name, 'wp-loyalty-rules' ) : '';
 				//phpcs:ignore
-				$user_reward->description = ! empty( $user_reward->description ) ? __( $user_reward->description, 'wll-loyalty-launcher' ) : '';
+				$user_reward->description = ! empty( $user_reward->description ) ? __( $user_reward->description, 'wp-loyalty-rules' ) : '';
 				$user_reward->button_text = __( 'Redeem', 'wll-loyalty-launcher' );
 				$user_reward->action_text = Loyalty::getUserRewardText( $user_reward );
 				if ( ! empty( $user_reward->discount_code ) ) {

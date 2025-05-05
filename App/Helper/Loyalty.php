@@ -101,11 +101,11 @@ class Loyalty {
 		$user                  = self::getUserDetails();
 		foreach ( $campaign_list as &$active_campaigns ) {
 			//phpcs:ignore
-			$active_campaigns->name = ! empty( $active_campaigns->name ) ? __( $active_campaigns->name, 'wll-loyalty-launcher' ) : '';
+			$active_campaigns->name = ! empty( $active_campaigns->name ) ? __( $active_campaigns->name, 'wp-loyalty-rules' ) : '';
 			//phpcs:ignore
-			$active_campaigns->description = ! empty( $active_campaigns->description ) ? __( $active_campaigns->description, 'wll-loyalty-launcher' ) : '';
+			$active_campaigns->description = ! empty( $active_campaigns->description ) ? __( $active_campaigns->description, 'wp-loyalty-rules' ) : '';
 			//phpcs:ignore
-			$active_campaigns->campaign_title_discount = ! empty( $active_campaigns->campaign_title_discount ) ? __( $active_campaigns->campaign_title_discount, 'wll-loyalty-launcher' ) : '';
+			$active_campaigns->campaign_title_discount = ! empty( $active_campaigns->campaign_title_discount ) ? __( $active_campaigns->campaign_title_discount, 'wp-loyalty-rules' ) : '';
 			if ( ! empty( $active_campaigns->action_type ) ) {
 				self::getCampaignActions( $active_campaigns, $user );
 			}
@@ -398,12 +398,12 @@ class Loyalty {
 		$singular = ! empty( $settings['wlr_point_singular_label'] ) ? $settings['wlr_point_singular_label'] : 'point';
 		if ( $label_translate ) {
 			//phpcs:ignore
-			$singular = __( $singular, 'wll-loyalty-launcher' );
+			$singular = __( $singular, 'wp-loyalty-rules' );
 		}
 		$plural = ! empty( $settings['wlr_point_label'] ) ? $settings['wlr_point_label'] : 'points';
 		if ( $label_translate ) {
 			//phpcs:ignore
-			$plural = __( $plural, 'wll-loyalty-launcher' );
+			$plural = __( $plural, 'wp-loyalty-rules' );
 		}
 		$point_label = ( $point == 0 || $point > 1 ) ? $plural : $singular;
 
@@ -565,9 +565,9 @@ class Loyalty {
 		}
 		foreach ( $rewards as $reward ) {
 			//phpcs:ignore
-			$reward->name = ! empty( $reward->name ) ? __( $reward->name, 'wll-loyalty-launcher' ) : '';
+			$reward->name = ! empty( $reward->name ) ? __( $reward->name, 'wp-loyalty-rules' ) : '';
 			//phpcs:ignore
-			$reward->description = ! empty( $reward->description ) ? __( $reward->description, 'wll-loyalty-launcher' ) : '';
+			$reward->description = ! empty( $reward->description ) ? __( $reward->description, 'wp-loyalty-rules' ) : '';
 		}
 		$message = "";
 		if ( count( $rewards ) == 0 ) {
@@ -595,9 +595,9 @@ class Loyalty {
 	public static function getRewardLabel( $reward_count = 0 ) {
 		$setting_option = get_option( 'wlr_settings', [] );
 		//phpcs:ignore
-		$singular = ( ! empty( $setting_option['reward_singular_label'] ) ) ? __( $setting_option['reward_singular_label'], 'wll-loyalty-launcher' ) : __( 'reward', 'wll-loyalty-launcher' );
+		$singular = ( ! empty( $setting_option['reward_singular_label'] ) ) ? __( $setting_option['reward_singular_label'], 'wp-loyalty-rules' ) : __( 'reward', 'wp-loyalty-rules' );
 		//phpcs:ignore
-		$plural       = ( ! empty( $setting_option['reward_plural_label'] ) ) ? __( $setting_option['reward_plural_label'], 'wll-loyalty-launcher' ) : __( 'rewards', 'wll-loyalty-launcher' );
+		$plural       = ( ! empty( $setting_option['reward_plural_label'] ) ) ? __( $setting_option['reward_plural_label'], 'wp-loyalty-rules' ) : __( 'rewards', 'wp-loyalty-rules' );
 		$reward_label = ( $reward_count == 0 || $reward_count > 1 ) ? $plural : $singular;
 
 		return apply_filters( 'wlr_get_reward_label', $reward_label, $reward_count );
