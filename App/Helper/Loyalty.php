@@ -355,8 +355,10 @@ class Loyalty {
 			case 'fixed_cart':
 			case 'points_conversion':
 				if ( $user_reward->coupon_type == 'percent' ) {
-					// translators: First %s will replace discount value followed by %, Second %d will replace required point, Third %s will replace point label, Fourth %s will replace discount value followed by %
-					$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%1$s Off', 'wll-loyalty-launcher' ), $user_reward->discount_value . '%' ) : sprintf( __( '%2$d %3$s = %4$s Off', 'wll-loyalty-launcher' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $user_reward->discount_value . '%' );
+					// translators: %s will replace discount value
+					$text = ( $user_reward->reward_type == 'redeem_coupon' ) ? sprintf( __( '%s Off', 'wll-loyalty-launcher' ), $user_reward->discount_value . '%' )
+						// translators: First %d will replace required point, Second %s will replace point label, Third %s will replace discount value
+						: sprintf( __( '%1$d %2$s = %3$s Off', 'wll-loyalty-launcher' ), $user_reward->require_point, self::getPointLabel( $user_reward->require_point ), $user_reward->discount_value . '%' );
 				} else {
 					$discount_value = WC::getCustomPrice( $user_reward->discount_value );
 					// translators: %s will replace discount value
