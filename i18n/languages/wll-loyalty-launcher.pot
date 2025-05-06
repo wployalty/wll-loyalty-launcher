@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-05T11:03:57+00:00\n"
+"POT-Creation-Date: 2025-05-06T05:03:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: wll-loyalty-launcher\n"
@@ -52,7 +52,7 @@ msgstr ""
 #: App/Controller/Member.php:24
 #: App/Controller/Member.php:43
 #: App/Controller/Member.php:106
-#: App/Controller/Member.php:148
+#: App/Controller/Member.php:149
 msgid "Basic check failed"
 msgstr ""
 
