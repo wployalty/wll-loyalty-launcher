@@ -60,6 +60,13 @@ class Router {
 		add_action( 'wp_ajax_nopriv_wll_get_launcher_popup_details', [ Common::class, 'getLauncherWidgetData' ] );
 
 		// Translate
+		add_filter('wlt_dynamic_string_domain',function ($domains){
+			if(!is_array($domains)){
+				return $domains;
+			}
+			$domains[] = 'wll-loyalty-launcher';
+			return $domains;
+		});
 		add_filter( 'wlt_dynamic_string_list', [ Common::class, 'getLauncherDynamicStrings' ], 10, 2 );
 	}
 }

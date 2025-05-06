@@ -38,7 +38,7 @@ class Translate {
 	 * Retrieves a string value based on key from saved settings or default settings.
 	 *
 	 * @param string $key The key to look for in the settings.
-	 * @param string $default The default value to use if key is not found in saved settings.
+	 * @param mixed $default The default value to use if key is not found in saved settings.
 	 * @param array $saved The array of saved settings to search for the key.
 	 *
 	 * @return string The value corresponding to the key, or an empty string if not found.
