@@ -45,9 +45,9 @@ class Guest {
 			if ( ! empty( $rewards ) && is_array( $rewards ) ) {
 				foreach ( $rewards as $reward ) {
 					//phpcs:ignore
-					$reward->name = ! empty( $reward->name ) ? __( $reward->name, 'wll-loyalty-launcher' ) : '';
+					$reward->name = ! empty( $reward->name ) ? __( $reward->name, 'wp-loyalty-rules' ) : '';
 					//phpcs:ignore
-					$reward->description = ! empty( $reward->description ) ? __( $reward->description, 'wll-loyalty-launcher' ) : '';
+					$reward->description = ! empty( $reward->description ) ? __( $reward->description, 'wp-loyalty-rules' ) : '';
 					$reward->action_text = Loyalty::getUserRewardText( $reward );
 				}
 			}

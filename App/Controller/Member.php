@@ -54,9 +54,9 @@ class Member {
 			}
 			foreach ( $available_rewards as $user_reward ) {
 				//phpcs:ignore
-				$user_reward->name = ! empty( $user_reward->name ) ? __( $user_reward->name, 'wll-loyalty-launcher' ) : '';
+				$user_reward->name = ! empty( $user_reward->name ) ? __( $user_reward->name, 'wp-loyalty-rules' ) : '';
 				//phpcs:ignore
-				$user_reward->description = ! empty( $user_reward->description ) ? __( $user_reward->description, 'wll-loyalty-launcher' ) : '';
+				$user_reward->description = ! empty( $user_reward->description ) ? __( $user_reward->description, 'wp-loyalty-rules' ) : '';
 				$user_reward->button_text = __( 'Redeem', 'wll-loyalty-launcher' );
 				$user_reward->action_text = Loyalty::getUserRewardText( $user_reward );
 				if ( ! empty( $user_reward->discount_code ) ) {
@@ -122,6 +122,7 @@ class Member {
 			}
 			$coupon_rewards = array_values( $coupon_rewards );// For React, key must start from 0
 			foreach ( $coupon_rewards as &$coupon_reward ) {
+				$coupon_reward->name = __($coupon_reward->name,'wp-loyalty-rules');
 				$coupon_reward->reward_table = 'user_reward';
 			}
 			wp_send_json_success( [
