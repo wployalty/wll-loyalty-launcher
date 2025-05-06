@@ -122,6 +122,7 @@ class Member {
 			}
 			$coupon_rewards = array_values( $coupon_rewards );// For React, key must start from 0
 			foreach ( $coupon_rewards as &$coupon_reward ) {
+				$coupon_reward->name = __($coupon_reward->name,'wp-loyalty-rules');
 				$coupon_reward->reward_table = 'user_reward';
 			}
 			wp_send_json_success( [
