@@ -77,13 +77,15 @@ class Common {
 			'admin_head',
 			'admin_enqueue_scripts'
 		] ) );
+		$cache_fix     = apply_filters( 'wll_load_admin_asset_with_time', true );
+		$add_cache_fix = ( $cache_fix ) ? '&t=' . time() : '';
 		// remove admin notice
 		remove_all_actions( 'admin_notices' );
 		// media library for launcher icon image
 		wp_enqueue_media();
-		wp_enqueue_style( WLL_PLUGIN_SLUG . '-wlr-font', WLR_PLUGIN_URL . 'Assets/Site/Css/wlr-fonts' . $suffix . '.css', [], WLR_PLUGIN_VERSION . '&t=' . time() );
-		wp_enqueue_style( WLR_PLUGIN_SLUG . '-alertify', WLR_PLUGIN_URL . 'Assets/Admin/Css/alertify.css', [], WLR_PLUGIN_VERSION );
-		wp_enqueue_script( WLR_PLUGIN_SLUG . '-alertify', WLR_PLUGIN_URL . 'Assets/Admin/Js/alertify.js', [ 'jquery' ], WLR_PLUGIN_VERSION . '&t=' . time() );
+		wp_enqueue_style( WLL_PLUGIN_SLUG . '-wlr-font', WLR_PLUGIN_URL . 'Assets/Site/Css/wlr-fonts' . $suffix . '.css', [], WLR_PLUGIN_VERSION . $add_cache_fix );
+		wp_enqueue_style( WLR_PLUGIN_SLUG . '-alertify', WLR_PLUGIN_URL . 'Assets/Admin/Css/alertify.css', [], WLR_PLUGIN_VERSION . $add_cache_fix );
+		wp_enqueue_script( WLR_PLUGIN_SLUG . '-alertify', WLR_PLUGIN_URL . 'Assets/Admin/Js/alertify.js', [ 'jquery' ], WLR_PLUGIN_VERSION . $add_cache_fix );
 		$common_path   = WLL_PLUGIN_DIR . '/assets/admin/js/dist';
 		$js_files      = Util::getDirFileLists( $common_path );
 		$localize_name = '';
@@ -94,7 +96,7 @@ class Common {
 			$js_file_url  = WLL_PLUGIN_URL . $path;
 			if ( $js_file_name == 'main.bundle.js' ) {
 				$localize_name = $js_name;
-				wp_register_script( $js_name, $js_file_url, [ 'jquery' ], WLL_PLUGIN_VERSION . '&t=' . time() );
+				wp_register_script( $js_name, $js_file_url, [ 'jquery' ], WLL_PLUGIN_VERSION . $add_cache_fix );
 				wp_enqueue_script( $js_name );
 			}
 		}
@@ -213,7 +215,7 @@ class Common {
 		if ( defined( 'SCRIPT_DEBUG' ) ) {
 			$suffix = SCRIPT_DEBUG ? '' : '.min';
 		}
-		$cache_fix     = apply_filters( 'wlr_load_asset_with_time', true );
+		$cache_fix     = apply_filters( 'wll_load_site_asset_with_time', true );
 		$add_cache_fix = ( $cache_fix ) ? '&t=' . time() : '';
 		wp_enqueue_style( WLL_PLUGIN_SLUG . '-wlr-font', WLR_PLUGIN_URL . 'Assets/Site/Css/wlr-fonts' . $suffix . '.css', [], WLR_PLUGIN_VERSION . $add_cache_fix );
 		wp_enqueue_style( WLL_PLUGIN_SLUG . '-wlr-launcher', WLL_PLUGIN_URL . 'assets/site/css/launcher-ui.css', [], WLR_PLUGIN_VERSION . $add_cache_fix );
